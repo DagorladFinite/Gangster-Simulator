@@ -10,6 +10,8 @@ public class Click : MonoBehaviour {
 	public double karma = 0;
 	//private float h = Screen.height / 2;
 	//private float w = Screen.width / 2;
+	//cancer
+
 	public bool popup1 = false; 
 	public bool popup2 = false; 
 	public bool canclick = true;

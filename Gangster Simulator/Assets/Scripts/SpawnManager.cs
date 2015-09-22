@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour {
 		*/
 		for (int i = 0; i<max_quantity; i++) {
 			Posx = Random.Range (625.0f, 640.0f);
-			Pj = Instantiate (Pj,new Vector3(Posx,183.60f,-0.69f),transform.rotation) as GameObject;
+			Pj = Instantiate (Pj,new Vector3(Posx,183.65f,-0.69f),transform.rotation) as GameObject;
 		
 		}
 	}

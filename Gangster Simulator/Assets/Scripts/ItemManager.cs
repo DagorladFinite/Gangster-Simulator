@@ -11,6 +11,7 @@ public class ItemManager : MonoBehaviour {
 	public int count;
 	public string itemName;
 	public Color stand;
+	public int id;
 	public Color aff;
 	private float _baseCost;
 

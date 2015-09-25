@@ -12,6 +12,7 @@ public class UpgradeManager : MonoBehaviour {
 	public string itemName;
 	public Color stand;
 	public Color aff;
+	public int id;
 	private float _baseCost;
 
 

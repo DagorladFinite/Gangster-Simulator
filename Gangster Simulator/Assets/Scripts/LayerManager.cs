@@ -11,6 +11,7 @@ public class LayerManager: MonoBehaviour {
 	public string itemName;
 	public Color stand;
 	public Color aff;
+	public int id;
 	public float scale = 0.0001f;
 
 

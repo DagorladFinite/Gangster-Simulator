@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class Click : MonoBehaviour {
 
@@ -8,9 +11,7 @@ public class Click : MonoBehaviour {
 	public float gold = 0.00f;
 	public int goldperclick = 1;
 	public double karma = 0;
-	//private float h = Screen.height / 2;
-	//private float w = Screen.width / 2;
-	//cancer
+
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -26,6 +27,14 @@ public class Click : MonoBehaviour {
 		mpc.text = goldperclick + " Money/click";
 		checkifpopup1 ();
 		checkifpopup2 ();
+		if (Input.GetKey ("escape")) {
+			Save();
+			Application.Quit ();
+		}
+
+		if (Input.GetKey ("l")) {
+			load ();
+		}
 	}
 
 	public void Clicked(){
@@ -71,8 +80,8 @@ public class Click : MonoBehaviour {
 
 	void checkifpopup1()
 	{ 
-		int random = Random.Range (0, 10000);
-		if (karma >= 50 && random <= 50 && Time.time - time > Random.Range (60, 600)) {
+		int random = UnityEngine.Random.Range (0, 10000);
+		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup1 = true;
 			time = Time.time;
 		} 
@@ -81,10 +90,44 @@ public class Click : MonoBehaviour {
 
 	void checkifpopup2()
 	{
-		int random = Random.Range (0, 10000);
-		if (karma <= -50 && random <= 50 && Time.time - time > Random.Range (60, 600)) {
+		int random = UnityEngine.Random.Range (0, 10000);
+		if (karma <= -50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup2 = true;
 			time = Time.time;
 		}
 	}
+	public void Save(){
+		BinaryFormatter bf = new BinaryFormatter ();
+		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
+
+		PlayerData data = new PlayerData ();
+		data.gold = gold;
+		data.goldperclick = goldperclick;
+		data.karma = karma;
+
+		bf.Serialize (file, data);
+		file.Close ();
+	}
+
+	public void load()
+	{
+		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+			PlayerData data = (PlayerData)bf.Deserialize(file);
+			file.Close ();
+
+			gold = data.gold;
+			goldperclick = data.goldperclick;
+			karma = data.karma;
+		}
+	}
+}
+
+[Serializable]
+class PlayerData
+{
+	public float gold;
+	public int goldperclick;
+	public double karma;
 }

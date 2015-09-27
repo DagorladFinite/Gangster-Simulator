@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -19,6 +20,14 @@ public class Click : MonoBehaviour {
 	public Texture aTexture;
 	public Texture aTexture2;
 	private float time = 0;
+	private GameObject[] items;
+	private GameObject[] labels;
+
+	void Start(){
+		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
+		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
+	
+	}
 
 	//GUI.Button(new Rect(10, 20, 100, 20), "Hello World");
 
@@ -98,13 +107,26 @@ public class Click : MonoBehaviour {
 	}
 	public void Save(){
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
 
+		FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Create);
 		PlayerData data = new PlayerData ();
 		data.gold = gold;
 		data.goldperclick = goldperclick;
 		data.karma = karma;
-
+		for (int i=0; i<items.Length; i++) {
+			Items item = new Items ();
+			UpgradeManager script = items[i].GetComponent<UpgradeManager>();
+			item.id = script.id;
+			item.amount = script.count;
+			data.itemsz.Add(item);		
+		}
+		for (int i=0; i<labels.Length; i++) {
+			Labels label = new Labels ();
+			LayerManager script = labels[i].GetComponent<LayerManager>();
+			label.purchased = script.purchased;
+			data.labs.Add(label);		
+		}
+		data.itemsz.ToArray ();
 		bf.Serialize (file, data);
 		file.Close ();
 	}
@@ -120,8 +142,31 @@ public class Click : MonoBehaviour {
 			gold = data.gold;
 			goldperclick = data.goldperclick;
 			karma = data.karma;
+			for (int i=0; i<items.Length; i++) {
+				UpgradeManager script = items[i].GetComponent<UpgradeManager>();
+				script.id = data.itemsz[i].id;
+				script.count = data.itemsz[i].amount;
+			}
+			for (int i=0; i<labels.Length; i++) {
+				LayerManager script = labels[i].GetComponent<LayerManager>();
+				if (data.labs[i].purchased == true)
+					script.PurchasedLoad();
+			}
 		}
 	}
+}
+[Serializable]
+public class Items
+{
+	public int id;
+	public int amount;
+	
+}
+[Serializable]
+public class Labels
+{
+	public bool purchased;
+	
 }
 
 [Serializable]
@@ -130,4 +175,6 @@ class PlayerData
 	public float gold;
 	public int goldperclick;
 	public double karma;
+	public List<Items> itemsz = new List<Items> ();
+	public List<Labels> labs = new List<Labels> ();
 }

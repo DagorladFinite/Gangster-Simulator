@@ -50,5 +50,13 @@ public class LayerManager: MonoBehaviour {
 			this.transform.localScale = new Vector3(0.001F,0.001F,0.001F);
 		}
 	}
+	public void PurchasedLoad(){
+		purchased = true;
+		foreach (Transform child in transform)
+		{
+			child.gameObject.SetActive(true);
+		}
+		this.transform.localScale = new Vector3(0.001F,0.001F,0.001F);
+	}
 
 }

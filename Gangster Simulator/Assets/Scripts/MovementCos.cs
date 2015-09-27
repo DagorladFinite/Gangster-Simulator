@@ -6,11 +6,11 @@ public class MovementCos : MonoBehaviour {
 	float timer;
 	Vector3 startPos;
 	Vector3 endPos;
-	Movement otherScript;
+	//Movement otherScript;
 	
 	void Start() 
 	{
-		otherScript = GetComponent<Movement> ();
+		//otherScript = GetComponent<Movement> ();
 		RandomPosition();
 	}
 	
@@ -24,7 +24,7 @@ public class MovementCos : MonoBehaviour {
 	
 	void Update()
 	{
-		otherScript = GetComponent<Movement> ();
+		//otherScript = GetComponent<Movement> ();
 		if (Time.time - timer > 1)
 		{
 			RandomPosition();

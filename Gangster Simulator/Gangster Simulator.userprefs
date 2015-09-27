@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ItemManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LayerManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\ItemManager.cs" Line="11" Column="19" />
-      <File FileName="Assets\Scripts\LayerManager.cs" Line="14" Column="16" />
-      <File FileName="Assets\Scripts\UpgradeManager.cs" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\Click.cs" Line="153" Column="29" />
+      <File FileName="Assets\Scripts\LayerManager.cs" Line="23" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

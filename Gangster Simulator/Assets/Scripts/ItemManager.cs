@@ -13,6 +13,7 @@ public class ItemManager : MonoBehaviour {
 	public Color stand;
 	public int id;
 	public Color aff;
+	public int layer;
 	private float _baseCost;
 
 	void Awake()

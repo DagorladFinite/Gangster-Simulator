@@ -22,10 +22,13 @@ public class Click : MonoBehaviour {
 	private float time = 0;
 	private GameObject[] items;
 	private GameObject[] labels;
+	private GameObject[] upgrades; 
+	public GetChilds get;
+	public GetChilds get1;
+	public GetChilds get2;
 
 	void Start(){
-		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
-		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
+
 	
 	}
 
@@ -37,6 +40,7 @@ public class Click : MonoBehaviour {
 		checkifpopup1 ();
 		checkifpopup2 ();
 		if (Input.GetKey ("escape")) {
+			Debug.Log("saved");
 			Save();
 			Application.Quit ();
 		}
@@ -106,6 +110,10 @@ public class Click : MonoBehaviour {
 		}
 	}
 	public void Save(){
+		Debug.Log("saved");
+		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
+		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
+		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
 		BinaryFormatter bf = new BinaryFormatter ();
 
 		FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Create);
@@ -124,15 +132,32 @@ public class Click : MonoBehaviour {
 			Labels label = new Labels ();
 			LayerManager script = labels[i].GetComponent<LayerManager>();
 			label.purchased = script.purchased;
+			label.childs = script.childs;
 			data.labs.Add(label);		
 		}
+		for (int i=0; i<upgrades.Length; i++) {
+			Upgrades upgrade = new Upgrades ();
+			ItemManager script = upgrades[i].GetComponent<ItemManager>();
+			upgrade.id = script.id;
+			upgrade.amount = script.count;
+			upgrade.layer = script.layer;
+			data.upg.Add(upgrade);		
+		}
 		data.itemsz.ToArray ();
+		data.upg.ToArray ();
 		bf.Serialize (file, data);
 		file.Close ();
 	}
 
 	public void load()
 	{
+		int counter = 0;
+		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
+		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
+		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[]; 
+
+
+
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
@@ -142,6 +167,7 @@ public class Click : MonoBehaviour {
 			gold = data.gold;
 			goldperclick = data.goldperclick;
 			karma = data.karma;
+
 			for (int i=0; i<items.Length; i++) {
 				UpgradeManager script = items[i].GetComponent<UpgradeManager>();
 				script.id = data.itemsz[i].id;
@@ -150,10 +176,52 @@ public class Click : MonoBehaviour {
 			for (int i=0; i<labels.Length; i++) {
 				LayerManager script = labels[i].GetComponent<LayerManager>();
 				if (data.labs[i].purchased == true)
+				{
 					script.PurchasedLoad();
+					counter = counter + data.labs[i].childs;
+				}
 			}
+			//Debug.Log(counter);
+			//Debug.Log (get.childs.ToArray().Length);
+			for (int i=0; i<get.childs.ToArray().Length; i++) {
+
+				ItemManager script = get.childs[i].GetComponent<ItemManager>();
+				script.id = data.upg[i].id;
+				script.count = data.upg[i].amount;
+				Debug.Log(data.upg[i].layer);
+
+			}
+			for (int i=0; i<get1.childs.ToArray().Length; i++) {
+				
+				ItemManager script = get1.childs[i].GetComponent<ItemManager>();
+				script.id = data.upg[i].id;
+				script.count = data.upg[i].amount;
+				Debug.Log(data.upg[i].layer);
+				
+			}
+			for (int i=0; i<get2.childs.ToArray().Length; i++) {
+				
+				ItemManager script = get2.childs[i].GetComponent<ItemManager>();
+				script.id = data.upg[i].id;
+				script.count = data.upg[i].amount;
+				Debug.Log(data.upg[i].layer);
+				
+			}
+
 		}
 	}
+	public void cheat()
+	{
+		gold = gold + 100000;
+	}
+}
+[Serializable]
+public class Upgrades
+{
+	public int id;
+	public int amount;
+	public int layer;
+	
 }
 [Serializable]
 public class Items
@@ -166,6 +234,7 @@ public class Items
 public class Labels
 {
 	public bool purchased;
+	public int childs;
 	
 }
 
@@ -177,4 +246,5 @@ class PlayerData
 	public double karma;
 	public List<Items> itemsz = new List<Items> ();
 	public List<Labels> labs = new List<Labels> ();
+	public List<Upgrades> upg = new List<Upgrades> ();
 }

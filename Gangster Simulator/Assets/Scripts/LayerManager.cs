@@ -13,6 +13,7 @@ public class LayerManager: MonoBehaviour {
 	public Color aff;
 	public int id;
 	public float scale = 0.0001f;
+	public int childs = 0;
 
 
 
@@ -20,8 +21,12 @@ public class LayerManager: MonoBehaviour {
 	
 	void Awake()
 	{
-
-
+		int count = 0;
+		foreach (Transform child in transform) {
+			count++;
+		}
+		childs = count - 1;
+		Debug.Log (childs);
 	}
 	
 	

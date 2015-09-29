@@ -22,6 +22,7 @@ public class Click : MonoBehaviour {
 	private float time = 0;
 	private GameObject[] items;
 	private GameObject[] labels;
+	private GameObject[] upgrades;
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -126,6 +127,15 @@ public class Click : MonoBehaviour {
 			label.purchased = script.purchased;
 			data.labs.Add(label);		
 		}
+		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
+		for (int i=0; i<upgrades.Length; i++) {
+			Upgrades upgrade = new Upgrades ();
+			ItemManager script = upgrades[i].GetComponent<ItemManager>();
+			upgrade.id = script.id;
+			upgrade.amount = script.count;
+			data.upg.Add(upgrade);		
+		}
+		data.upg.ToArray ();
 		data.itemsz.ToArray ();
 		bf.Serialize (file, data);
 		file.Close ();
@@ -152,8 +162,22 @@ public class Click : MonoBehaviour {
 				if (data.labs[i].purchased == true)
 					script.PurchasedLoad();
 			}
+			upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
+			Debug.Log (upgrades.Length);
+			for (int i=0; i<upgrades.Length; i++) {
+				ItemManager script = upgrades[i].GetComponent<ItemManager>();
+				script.id = data.upg[i].id;
+				script.count = data.upg[i].amount;
+			}
 		}
 	}
+}
+[Serializable]
+public class Upgrades
+{
+	public int id;
+	public int amount;
+	
 }
 [Serializable]
 public class Items
@@ -177,4 +201,5 @@ class PlayerData
 	public double karma;
 	public List<Items> itemsz = new List<Items> ();
 	public List<Labels> labs = new List<Labels> ();
+	public List<Upgrades> upg = new List<Upgrades> ();
 }

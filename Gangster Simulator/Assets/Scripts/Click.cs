@@ -23,6 +23,7 @@ public class Click : MonoBehaviour {
 	private GameObject[] items;
 	private GameObject[] labels;
 	private GameObject[] upgrades;
+	public GameObject popup_mafia;
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -56,11 +57,13 @@ public class Click : MonoBehaviour {
 	void OnGUI() {
 		if (popup1) {
 
-			
+			/*
 			Rect windowRect = new Rect (Screen.width / 3, Screen.height / 3, 500, 650);
 			windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
 			windowRect = GUI.Window (0, windowRect, DoMyWindow, "POPUP1");
 			GUI.DrawTexture (windowRect, aTexture, ScaleMode.ScaleToFit, false, 0.0f);
+			*/
+			popup_mafia = Instantiate(popup_mafia, transform.position, transform.rotation) as GameObject;
 			canclick = false;
 			Time.timeScale = 0;
 
@@ -68,30 +71,31 @@ public class Click : MonoBehaviour {
 		}
 		if (popup2) {
 
-
+			/*
 			Rect windowRect = new Rect(Screen.width / 3, Screen.height / 3, 500, 650);
 			windowRect.center = new Vector2(Screen.width / 2, Screen.height / 2);
 			windowRect = GUI.Window (0, windowRect, DoMyWindow, "POPUP2");
 			GUI.DrawTexture(windowRect, aTexture2, ScaleMode.ScaleToFit, false, 0.0f);
+			*/
 			canclick = false;
 			Time.timeScale = 0;
 
 
 		}
 	}
-	void DoMyWindow(int windowID) {
-		if (GUI.Button (new Rect (130, 475, 250, 150), "Click Me!")) {
+	public void click_popup() {
+		//if (GUI.Button (new Rect (130, 475, 250, 150), "Click Me!")) {
 			popup1 = false;
 			popup2 = false;
 			canclick = true;
 			Time.timeScale = 1;
-		}
+		//}
 	}
 
 	void checkifpopup1()
 	{ 
 		int random = UnityEngine.Random.Range (0, 10000);
-		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)) {
+		if (karma >= 50 && random <= 50){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup1 = true;
 			time = Time.time;
 		} 
@@ -131,9 +135,16 @@ public class Click : MonoBehaviour {
 		for (int i=0; i<upgrades.Length; i++) {
 			Upgrades upgrade = new Upgrades ();
 			ItemManager script = upgrades[i].GetComponent<ItemManager>();
+			Debug.Log ("I: " +  i);
+			Debug.Log ("Script id: "+ script.id);
+			Debug.Log ("Script count: "+ script.count);
 			upgrade.id = script.id;
 			upgrade.amount = script.count;
-			data.upg.Add(upgrade);		
+			data.upg.Add(upgrade);	
+
+			Debug.Log ("Upgrade id: " + upgrade.id);
+			Debug.Log ("Upgrade amount: " + upgrade.amount);
+
 		}
 		data.upg.ToArray ();
 		data.itemsz.ToArray ();
@@ -144,34 +155,46 @@ public class Click : MonoBehaviour {
 	public void load()
 	{
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-			PlayerData data = (PlayerData)bf.Deserialize(file);
+			BinaryFormatter bf = new BinaryFormatter ();
+			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
 
 			gold = data.gold;
 			goldperclick = data.goldperclick;
 			karma = data.karma;
 			for (int i=0; i<items.Length; i++) {
-				UpgradeManager script = items[i].GetComponent<UpgradeManager>();
-				script.id = data.itemsz[i].id;
-				script.count = data.itemsz[i].amount;
+				UpgradeManager script = items [i].GetComponent<UpgradeManager> ();
+				script.id = data.itemsz [i].id;
+				script.count = data.itemsz [i].amount;
 			}
 			for (int i=0; i<labels.Length; i++) {
-				LayerManager script = labels[i].GetComponent<LayerManager>();
-				if (data.labs[i].purchased == true)
-					script.PurchasedLoad();
+				LayerManager script = labels [i].GetComponent<LayerManager> ();
+				if (data.labs [i].purchased == true)
+					script.PurchasedLoad ();
 			}
 			upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
-			Debug.Log (upgrades.Length);
-			for (int i=0; i<upgrades.Length; i++) {
-				ItemManager script = upgrades[i].GetComponent<ItemManager>();
-				script.id = data.upg[i].id;
-				script.count = data.upg[i].amount;
+
+				for (int i=0; i<upgrades.Length; i++) {
+					for (int j=0; j<upgrades.Length;j++){
+						ItemManager script = upgrades [j].GetComponent<ItemManager> ();
+							if (script.id == data.upg[i].id){
+							script.count = data.upg [i].amount;
+							//Debug.Log (script.count);
+							}
+				}
+				
+
 			}
 		}
+		}
+	public void cheat(){
+		gold = gold + 10000;
 	}
-}
+	}
+
+
+
 [Serializable]
 public class Upgrades
 {

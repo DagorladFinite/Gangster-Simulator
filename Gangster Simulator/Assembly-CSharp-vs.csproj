@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\MoneyPerSec.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\MovementCos.cs" />
+     <Compile Include="Assets\Scripts\SkyManager.cs" />
      <Compile Include="Assets\Scripts\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\UpgradeManager.cs" />

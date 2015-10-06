@@ -1,10 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SkyManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MoneyPerSec.cs">
     <Files>
-      <File FileName="Assets\Scripts\SkyManager.cs" Line="15" Column="49" />
-      <File FileName="Assets\Scripts\Spawner.cs" Line="23" Column="53" />
-      <File FileName="Assets\Scripts\SpawnManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LayerManager.cs" Line="65" Column="52" />
+      <File FileName="Assets\Scripts\SkyManager.cs" Line="25" Column="1" />
+      <File FileName="Assets\Scripts\Spawner.cs" Line="42" Column="1" />
+      <File FileName="Assets\Scripts\SpawnManager.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\ItemManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Click.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MoneyPerSec.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

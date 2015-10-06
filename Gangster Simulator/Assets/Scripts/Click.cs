@@ -23,7 +23,9 @@ public class Click : MonoBehaviour {
 	private GameObject[] items;
 	private GameObject[] labels;
 	private GameObject[] upgrades;
+	private bool pop = false;
 	public GameObject popup_mafia;
+	public Transform pops;
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -55,7 +57,7 @@ public class Click : MonoBehaviour {
 
 	}
 	void OnGUI() {
-		if (popup1) {
+		if (popup1 && pop == false) {
 
 			/*
 			Rect windowRect = new Rect (Screen.width / 3, Screen.height / 3, 500, 650);
@@ -63,13 +65,16 @@ public class Click : MonoBehaviour {
 			windowRect = GUI.Window (0, windowRect, DoMyWindow, "POPUP1");
 			GUI.DrawTexture (windowRect, aTexture, ScaleMode.ScaleToFit, false, 0.0f);
 			*/
-			popup_mafia = Instantiate(popup_mafia, transform.position, transform.rotation) as GameObject;
+			popup_mafia = Instantiate(popup_mafia, new Vector3 (630,transform.position.y,transform.position.z), transform.rotation) as GameObject;
+			popup_mafia.transform.SetParent(pops);
+			popup_mafia.transform.localScale = new Vector3 (0.5f,0.5f,1);
 			canclick = false;
+			pop = true;
 			Time.timeScale = 0;
 
 		
 		}
-		if (popup2) {
+		if (popup2 && pop == false) {
 
 			/*
 			Rect windowRect = new Rect(Screen.width / 3, Screen.height / 3, 500, 650);
@@ -78,6 +83,7 @@ public class Click : MonoBehaviour {
 			GUI.DrawTexture(windowRect, aTexture2, ScaleMode.ScaleToFit, false, 0.0f);
 			*/
 			canclick = false;
+			pop = true;
 			Time.timeScale = 0;
 
 

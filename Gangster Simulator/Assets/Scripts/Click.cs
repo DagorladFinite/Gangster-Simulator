@@ -23,9 +23,7 @@ public class Click : MonoBehaviour {
 	private GameObject[] items;
 	private GameObject[] labels;
 	private GameObject[] upgrades;
-	private bool pop = false;
-	public GameObject popup_mafia;
-	public Transform pops;
+
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -57,51 +55,45 @@ public class Click : MonoBehaviour {
 
 	}
 	void OnGUI() {
-		if (popup1 && pop == false) {
+		if (popup1) {
 
-			/*
+
 			Rect windowRect = new Rect (Screen.width / 3, Screen.height / 3, 500, 650);
 			windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
-			windowRect = GUI.Window (0, windowRect, DoMyWindow, "POPUP1");
+			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP1");
 			GUI.DrawTexture (windowRect, aTexture, ScaleMode.ScaleToFit, false, 0.0f);
-			*/
-			popup_mafia = Instantiate(popup_mafia, new Vector3 (630,transform.position.y,transform.position.z), transform.rotation) as GameObject;
-			popup_mafia.transform.SetParent(pops);
-			popup_mafia.transform.localScale = new Vector3 (0.5f,0.5f,1);
 			canclick = false;
-			pop = true;
 			Time.timeScale = 0;
 
 		
 		}
-		if (popup2 && pop == false) {
+		if (popup2) {
 
-			/*
+
 			Rect windowRect = new Rect(Screen.width / 3, Screen.height / 3, 500, 650);
 			windowRect.center = new Vector2(Screen.width / 2, Screen.height / 2);
-			windowRect = GUI.Window (0, windowRect, DoMyWindow, "POPUP2");
+			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP2");
 			GUI.DrawTexture(windowRect, aTexture2, ScaleMode.ScaleToFit, false, 0.0f);
-			*/
+
 			canclick = false;
-			pop = true;
 			Time.timeScale = 0;
 
 
 		}
 	}
-	public void click_popup() {
-		//if (GUI.Button (new Rect (130, 475, 250, 150), "Click Me!")) {
+	public void click_popup(int windowID) {
+		if (GUI.Button (new Rect (130, 425, 250, 100), "Click Me!")) {
 			popup1 = false;
 			popup2 = false;
 			canclick = true;
 			Time.timeScale = 1;
-		//}
+		}
 	}
 
 	void checkifpopup1()
 	{ 
 		int random = UnityEngine.Random.Range (0, 10000);
-		if (karma >= 50 && random <= 50){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
+		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (10, 20)){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup1 = true;
 			time = Time.time;
 		} 

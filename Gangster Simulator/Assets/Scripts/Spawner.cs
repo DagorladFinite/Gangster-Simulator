@@ -23,11 +23,11 @@ public class Spawner : MonoBehaviour {
 		d.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 		*/
 	
-			Posx = Random.Range (625.0f, 640.0f);
-			cares1 = Instantiate (Cara,new Vector3(Posx,transform.position.y,transform.position.z),transform.rotation) as GameObject;
+			//Posx = Random.Range (625.0f, 640.0f);
+		cares1 = Instantiate (Cara,new Vector3(transform.position.x,transform.position.y,transform.position.z),transform.rotation) as GameObject;
 			cares1.GetComponent<SpriteRenderer>().sprite = cares[Random.Range (0,16)];
 			cares1.transform.parent = transform;
-			cossos1 = Instantiate (Cos,new Vector3(Posx,transform.position.y - 0.40f,transform.position.z),transform.rotation) as GameObject;
+		cossos1 = Instantiate (Cos,new Vector3(transform.position.x,transform.position.y - 0.40f,transform.position.z),transform.rotation) as GameObject;
 			cossos1.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 			cossos1.transform.parent = transform;
 			

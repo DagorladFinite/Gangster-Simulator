@@ -12,7 +12,9 @@ public class Click : MonoBehaviour {
 	public float gold = 0.00f;
 	public int goldperclick = 1;
 	public double karma = 0;
-
+	public UnityEngine.UI.ScrollRect SR;
+	public UnityEngine.UI.ScrollRect SR2;
+	public UnityEngine.CanvasGroup pp;
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -62,8 +64,14 @@ public class Click : MonoBehaviour {
 			windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
 			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP1");
 			GUI.DrawTexture (windowRect, aTexture, ScaleMode.ScaleToFit, false, 0.0f);
+
+
+
 			canclick = false;
 			Time.timeScale = 0;
+			SR.enabled = false;
+			SR2.enabled = false;
+
 
 		
 		}
@@ -75,8 +83,11 @@ public class Click : MonoBehaviour {
 			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP2");
 			GUI.DrawTexture(windowRect, aTexture2, ScaleMode.ScaleToFit, false, 0.0f);
 
+
 			canclick = false;
 			Time.timeScale = 0;
+			SR.enabled = false;
+			SR2.enabled = false;
 
 
 		}
@@ -87,6 +98,8 @@ public class Click : MonoBehaviour {
 			popup2 = false;
 			canclick = true;
 			Time.timeScale = 1;
+			SR.enabled = true;
+			SR2.enabled = true;
 		}
 	}
 
@@ -188,6 +201,13 @@ public class Click : MonoBehaviour {
 		}
 	public void cheat(){
 		gold = gold + 10000;
+	}
+
+	public void settings(){
+		pp.alpha = 100;
+		pp.blocksRaycasts = true;
+		pp.interactable = true;
+		canclick = false;
 	}
 	}
 

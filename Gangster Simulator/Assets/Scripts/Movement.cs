@@ -3,31 +3,37 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
-	float timer;
-	Vector3 startPos;
-	Vector3 endPos;
-
-
+	private Vector2 endpoint;
 	
-	void Start() 
-	{
-		RandomPosition();
-	}
+	public float speed;
+	public float counter;
+	private float counter2;
+	private int numberOfLoops = 1;
 	
-	void RandomPosition()
+	void Update ()
 	{
-		timer = Time.time;
-		startPos = transform.position;
-		endPos = new Vector3(Random.Range(625.0f, 640.0f), 183.60f, 0);
-	}
-	
-	void Update()
-	{
-		if (Time.time - timer > 1)
-		{
-			RandomPosition();
+		counter2 -= Time.deltaTime;
+		if (counter2 < 0 && numberOfLoops > 0) {
+			RandomPosition ();
+			numberOfLoops--;
+			counter2 = counter;
+		} else {
+			int Rand = Random.Range (0,1000);
+				if ( Rand<10)
+			{
+				RandomPosition ();
+			}
+		
 		}
-		transform.position = Vector3.Lerp(startPos, endPos, Time.time - timer);
+		
+		transform.position = Vector2.Lerp(transform.position, endpoint, Time.deltaTime * speed);
+	}
+	
+	void RandomPosition ()
+	{
+		float x = Random.Range(624.0f, 640.0f);
+		float y = 183.65f;
+		endpoint = new Vector2(x, y);
 	}
 
 }

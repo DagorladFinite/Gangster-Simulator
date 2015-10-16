@@ -18,9 +18,10 @@ public class SpawnManager : MonoBehaviour {
 		d = Instantiate (Cos,new Vector3(Posx,183.12f,-0.69f),transform.rotation) as GameObject;
 		d.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 		*/
+		Posx = 625.0f;
 		for (int i = 0; i<max_quantity; i++) {
-			Posx = Random.Range (625.0f, 640.0f);
 			Pj = Instantiate (Pj,new Vector3(Posx,183.65f,-0.69f),transform.rotation) as GameObject;
+			Posx = Posx+0.2f;
 		
 		}
 	}

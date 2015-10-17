@@ -7,7 +7,6 @@ public class SpawnManager : MonoBehaviour {
 	public float Posx;
 	public int max_quantity;
 
-
 	// Use this for initialization
 	void Start () {
 
@@ -18,9 +17,10 @@ public class SpawnManager : MonoBehaviour {
 		d = Instantiate (Cos,new Vector3(Posx,183.12f,-0.69f),transform.rotation) as GameObject;
 		d.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 		*/
-		Posx = 625.0f;
+		Posx = 626.0f;
 		for (int i = 0; i<max_quantity; i++) {
-			Pj = Instantiate (Pj,new Vector3(Posx,183.65f,-0.69f),transform.rotation) as GameObject;
+			Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
+			//Pj.transform.SetParent(transform);
 			Posx = Posx+0.2f;
 		
 		}

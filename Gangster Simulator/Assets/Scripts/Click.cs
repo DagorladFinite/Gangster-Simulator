@@ -204,6 +204,14 @@ public class Click : MonoBehaviour {
 	}
 
 	public void settings(){
+		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+		for (int i= 0; i<pjs.Length; i++) {
+			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+			foreach (SpriteRenderer rnd in rend)
+				rnd.enabled = false;
+			
+			
+		}
 		pp.alpha = 100;
 		pp.blocksRaycasts = true;
 		pp.interactable = true;

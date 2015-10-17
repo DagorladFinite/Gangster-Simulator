@@ -16,6 +16,14 @@ public class Settings : MonoBehaviour {
 	}
 
 	public void Return (){
+		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+		for (int i= 0; i<pjs.Length; i++) {
+			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+				foreach (SpriteRenderer rnd in rend)
+				rnd.enabled = true;
+
+			
+		}
 		pp.alpha = 0;
 		pp.blocksRaycasts = false;
 		pp.interactable = false;

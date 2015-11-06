@@ -15,6 +15,8 @@ public class Click : MonoBehaviour {
 	public UnityEngine.UI.ScrollRect SR;
 	public UnityEngine.UI.ScrollRect SR2;
 	public UnityEngine.CanvasGroup pp;
+	public UnityEngine.CanvasGroup po;
+	public UnityEngine.CanvasGroup pu;
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -57,58 +59,21 @@ public class Click : MonoBehaviour {
 
 	}
 	void OnGUI() {
-		if (popup1) {
 
-
-			Rect windowRect = new Rect (Screen.width / 3, Screen.height / 3, 500, 650);
-			windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
-			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP1");
-			GUI.DrawTexture (windowRect, aTexture, ScaleMode.ScaleToFit, false, 0.0f);
-
-
-
-			canclick = false;
-			Time.timeScale = 0;
-			SR.enabled = false;
-			SR2.enabled = false;
-
-
-		
-		}
-		if (popup2) {
-
-
-			Rect windowRect = new Rect(Screen.width / 3, Screen.height / 3, 500, 650);
-			windowRect.center = new Vector2(Screen.width / 2, Screen.height / 2);
-			windowRect = GUI.Window (0, windowRect, click_popup, "POPUP2");
-			GUI.DrawTexture(windowRect, aTexture2, ScaleMode.ScaleToFit, false, 0.0f);
-
-
-			canclick = false;
-			Time.timeScale = 0;
-			SR.enabled = false;
-			SR2.enabled = false;
-
-
-		}
 	}
-	public void click_popup(int windowID) {
-		if (GUI.Button (new Rect (130, 425, 250, 100), "Click Me!")) {
-			popup1 = false;
-			popup2 = false;
-			canclick = true;
-			Time.timeScale = 1;
-			SR.enabled = true;
-			SR2.enabled = true;
-		}
-	}
+
 
 	void checkifpopup1()
 	{ 
 		int random = UnityEngine.Random.Range (0, 10000);
-		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (10, 20)){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
+		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup1 = true;
 			time = Time.time;
+			//canclick = false;
+			Time.timeScale = 0;
+			SR.enabled = false;
+			SR2.enabled = false;
+			popups();
 		} 
 
 	}
@@ -117,8 +82,13 @@ public class Click : MonoBehaviour {
 	{
 		int random = UnityEngine.Random.Range (0, 10000);
 		if (karma <= -50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)) {
-			popup2 = true;
+
 			time = Time.time;
+			//canclick = false;
+			Time.timeScale = 0;
+			SR.enabled = false;
+			SR2.enabled = false;
+			popups2();
 		}
 	}
 	public void Save(){
@@ -217,7 +187,37 @@ public class Click : MonoBehaviour {
 		pp.interactable = true;
 		canclick = false;
 	}
+
+
+public void popups(){
+	GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+	for (int i= 0; i<pjs.Length; i++) {
+		SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+		foreach (SpriteRenderer rnd in rend)
+			rnd.enabled = false;
+		
+		
 	}
+	po.alpha = 100;
+	po.blocksRaycasts = true;
+	po.interactable = true;
+	canclick = false;
+}
+	public void popups2(){
+		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+		for (int i= 0; i<pjs.Length; i++) {
+			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+			foreach (SpriteRenderer rnd in rend)
+				rnd.enabled = false;
+			
+			
+		}
+		pu.alpha = 100;
+		pu.blocksRaycasts = true;
+		pu.interactable = true;
+		canclick = false;
+	}
+}
 
 
 

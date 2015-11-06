@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.Analytics;
+
+
 
 public class Click : MonoBehaviour {
 
@@ -42,8 +45,17 @@ public class Click : MonoBehaviour {
 		mpc.text = goldperclick + " Money/click";
 		checkifpopup1 ();
 		checkifpopup2 ();
-		if (Input.GetKey ("escape")) {
+		if (Input.GetKeyDown ("escape")) {
 			Save();
+			Analytics.CustomEvent("quit", new Dictionary<string, object>
+			{
+				{ "gold", gold },
+				{ "karma", karma },
+			});
+			Gender gender = Gender.Female;
+			Analytics.SetUserGender(gender);
+			int birthYear = 2014;
+			Analytics.SetUserBirthYear(birthYear);
 			Application.Quit ();
 		}
 

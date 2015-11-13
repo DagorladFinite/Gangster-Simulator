@@ -24,6 +24,7 @@ public class Settings : MonoBehaviour {
 
 			
 		}
+		click.set = false;
 		pp.alpha = 0;
 		pp.blocksRaycasts = false;
 		pp.interactable = false;

@@ -30,6 +30,7 @@ public class Click : MonoBehaviour {
 	private GameObject[] items;
 	private GameObject[] labels;
 	private GameObject[] upgrades;
+	public bool set = false;
 
 
 	void Start(){
@@ -78,7 +79,7 @@ public class Click : MonoBehaviour {
 	void checkifpopup1()
 	{ 
 		int random = UnityEngine.Random.Range (0, 10000);
-		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
+		if (karma >= 50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)&& set == false){// && Time.time - time > UnityEngine.Random.Range (60, 600)) {
 			popup1 = true;
 			time = Time.time;
 			//canclick = false;
@@ -93,7 +94,7 @@ public class Click : MonoBehaviour {
 	void checkifpopup2()
 	{
 		int random = UnityEngine.Random.Range (0, 10000);
-		if (karma <= -50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600)) {
+		if (karma <= -50 && random <= 50 && Time.time - time > UnityEngine.Random.Range (60, 600) && set == false) {
 
 			time = Time.time;
 			//canclick = false;
@@ -194,6 +195,7 @@ public class Click : MonoBehaviour {
 			
 			
 		}
+		set = true;
 		pp.alpha = 100;
 		pp.blocksRaycasts = true;
 		pp.interactable = true;

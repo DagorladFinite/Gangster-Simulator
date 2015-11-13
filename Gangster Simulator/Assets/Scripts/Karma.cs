@@ -14,7 +14,7 @@ public class Karma : MonoBehaviour {
 	}
 	
 	void Update(){
-		karma.text = click.karma + " Karma";
+		karma.text = string.Format("{0:0.##}",click.karma) + " Karma" ;
 	}
 	
 	public double GetKarmaPerSec(){

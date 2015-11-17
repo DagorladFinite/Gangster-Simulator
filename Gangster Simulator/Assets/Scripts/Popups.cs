@@ -24,6 +24,7 @@ public class Popups : MonoBehaviour {
 			
 			
 		}
+		click.gold = click.gold - ((click.gold * 10) / 100);
 		pp.alpha = 0;
 		pp.blocksRaycasts = false;
 		pp.interactable = false;

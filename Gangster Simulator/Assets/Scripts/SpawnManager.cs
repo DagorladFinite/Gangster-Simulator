@@ -17,10 +17,11 @@ public class SpawnManager : MonoBehaviour {
 		d = Instantiate (Cos,new Vector3(Posx,183.12f,-0.69f),transform.rotation) as GameObject;
 		d.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 		*/
-		Posx = 626.0f;
+		Posx = 0.0f;
 		for (int i = 0; i<max_quantity; i++) {
-			Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
-			//Pj.transform.SetParent(transform);
+			//Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
+			Pj = Instantiate (Pj,new Vector3(Posx,0.5f,0.0f),transform.rotation) as GameObject;
+			Pj.transform.SetParent(transform);
 			Posx = Posx+0.2f;
 		
 		}

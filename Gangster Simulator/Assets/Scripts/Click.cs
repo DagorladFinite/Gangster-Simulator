@@ -20,6 +20,7 @@ public class Click : MonoBehaviour {
 	public UnityEngine.CanvasGroup pp;
 	public UnityEngine.CanvasGroup po;
 	public UnityEngine.CanvasGroup pu;
+	public Feedbacker Feedbacker;
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -31,6 +32,8 @@ public class Click : MonoBehaviour {
 	private GameObject[] labels;
 	private GameObject[] upgrades;
 	public bool set = false;
+	public GameObject feedback;
+	GameObject fed;
 
 
 	void Start(){
@@ -68,6 +71,7 @@ public class Click : MonoBehaviour {
 	public void Clicked(){
 		if (canclick == true) {
 			gold += goldperclick;
+			Feedbacker.Spawn();
 		}
 
 	}

@@ -2,36 +2,35 @@
 using System.Collections;
 
 public class MovementCos : MonoBehaviour {
-	
-	float timer;
-	Vector3 startPos;
-	Vector3 endPos;
-	//Movement otherScript;
-	
-	void Start() 
-	{
-		//otherScript = GetComponent<Movement> ();
-		RandomPosition();
-	}
-	
-	void RandomPosition()
-	{
-		timer = Time.time;
-		startPos = transform.position;
-		endPos = new Vector3(Random.Range(625.0f, 640.0f), 183.12f, 0);
-		//endPos = otherScript.endPos;
-	}
-	
-	void Update()
-	{
-		//otherScript = GetComponent<Movement> ();
-		if (Time.time - timer > 1)
-		{
-			RandomPosition();
-		}
-		transform.position = Vector3.Lerp(startPos, endPos, Time.time - timer);
 
+    public Vector3 pointB;
+    Vector3 pointA;
 
-	}
-	
+    void Start()
+    {
+      pointA = transform.position;
+       
+    }
+    public void StartMove()
+    {
+        //while(transform.position != pointB)
+        StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
+    }
+    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
+    {
+        Debug.Log(transform.position);
+        float i = 0.0f;
+        float rate = 1.0f / time;
+        while (transform.position != endPos)
+        {
+            i += Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(transform.position, endPos, i);
+            yield return new WaitForSeconds(0.02f);
+        }
+        yield return true;
+        //yield return new WaitForSeconds(2);
+        Destroy(gameObject);
+        // Debug.Log(transform.position);
+    }
+
 }

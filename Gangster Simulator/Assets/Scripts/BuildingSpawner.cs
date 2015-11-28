@@ -122,6 +122,6 @@ public class BuildingSpawner : MonoBehaviour {
 			progress += increment;
 			yield return new WaitForSeconds(smoothness);
 		}
-		return true;
+		yield return true;
 	}
 }

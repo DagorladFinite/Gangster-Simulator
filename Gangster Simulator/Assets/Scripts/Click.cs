@@ -21,6 +21,7 @@ public class Click : MonoBehaviour {
 	public UnityEngine.CanvasGroup po;
 	public UnityEngine.CanvasGroup pu;
 	public Feedbacker Feedbacker;
+    public SpawnManager SpawnManager;
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -33,14 +34,18 @@ public class Click : MonoBehaviour {
 	private GameObject[] upgrades;
 	public bool set = false;
 	public GameObject feedback;
+    private List<GameObject> pjs;
+    private GameObject[] pjss;
 	GameObject fed;
 
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
-	
-	}
+        pjs = new List<GameObject>();
+        //Calc();
+
+    }
 
 	//GUI.Button(new Rect(10, 20, 100, 20), "Hello World");
 
@@ -68,10 +73,25 @@ public class Click : MonoBehaviour {
 		}
 	}
 
+   public void Calc()
+    {
+        pjss = GameObject.FindGameObjectsWithTag("Character") as GameObject[];
+        foreach (GameObject obj in pjss)
+        {
+            pjs.Add(obj);
+        }
+    }
+
 	public void Clicked(){
 		if (canclick == true) {
-			gold += goldperclick;
+          
+            gold += goldperclick;
 			Feedbacker.Spawn();
+            pjs[0].GetComponent<MovementCos>().StartMove();
+            pjs.RemoveAt(0);
+            Debug.Log(pjs.ToArray().Length);
+            //SpawnManager.Spawn();
+            pjs.Add(SpawnManager.Spawn());
 		}
 
 	}

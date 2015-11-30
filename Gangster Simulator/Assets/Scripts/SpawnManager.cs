@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour {
 		for (int i = 0; i<max_quantity; i++) {
             Posx = Random.Range(-6, 6);
             //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
-            Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),0.5f,0.0f),transform.rotation) as GameObject;
+            Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
 			Pj.transform.SetParent(transform);
 			//Posx = Posx+0.2f;
 		
@@ -38,7 +38,7 @@ public class SpawnManager : MonoBehaviour {
     public GameObject Spawn() {
         Posx = Random.Range(-6, 6);
         //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
-        Pj = Instantiate(Pj, new Vector3(Posx, 0.5f, 0.0f), transform.rotation) as GameObject;
+		Pj = Instantiate(Pj, new Vector3(Posx, transform.position.y+0.5f, 0.0f), transform.rotation) as GameObject;
         Pj.transform.localScale = new Vector3(1, 1, 1);
         Pj.transform.SetParent(transform);
         //Posx = Posx+0.2f;

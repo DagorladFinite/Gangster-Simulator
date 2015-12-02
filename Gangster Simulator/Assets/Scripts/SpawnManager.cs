@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour {
 	 float Posx;
 	public int max_quantity;
     public Click click;
+    //Spawner spawny;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,8 @@ public class SpawnManager : MonoBehaviour {
             Posx = Random.Range(-6, 6);
             //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
             Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
-			Pj.transform.SetParent(transform);
+           // Pj.GetComponentInChildren<Spawner>().Spawn();
+            Pj.transform.SetParent(transform);
 			//Posx = Posx+0.2f;
 		
 		}
@@ -39,9 +41,12 @@ public class SpawnManager : MonoBehaviour {
         Posx = Random.Range(-6, 6);
         //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
 		Pj = Instantiate(Pj, new Vector3(Posx, transform.position.y+0.5f, 0.0f), transform.rotation) as GameObject;
+        //Pj.GetComponentInChildren<Spawner>().Spawn();
         Pj.transform.localScale = new Vector3(1, 1, 1);
         Pj.transform.SetParent(transform);
         //Posx = Posx+0.2f;
         return Pj;
     }
+
+   
 }

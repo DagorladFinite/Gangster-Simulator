@@ -91,7 +91,8 @@ public class Click : MonoBehaviour {
             pjs.RemoveAt(0);
             Debug.Log(pjs.ToArray().Length);
             //SpawnManager.Spawn();
-            pjs.Add(SpawnManager.Spawn());
+             pjs.Add(SpawnManager.Spawn());
+           
 		}
 
 	}

@@ -6,6 +6,7 @@ public class MovementCos : MonoBehaviour {
     public Vector3 pointB;
     Vector3 pointA;
 	GameObject bar;
+    
 
     void Start()
     {
@@ -16,12 +17,12 @@ public class MovementCos : MonoBehaviour {
     public void StartMove()
     {
         //while(transform.position != pointB)
-        StartCoroutine(MoveObject(transform, pointA,bar.transform.position , 5.0f));
+        StartCoroutine(MoveObject(transform, pointA,bar.transform.position , 2.0f));
     }
    
 	IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {
-		bar = GameObject.FindGameObjectWithTag ("Bar") as GameObject;
+		//bar = GameObject.FindGameObjectWithTag ("Bar") as GameObject;
 
         Debug.Log(transform.position);
         float i = 0.0f;
@@ -37,6 +38,10 @@ public class MovementCos : MonoBehaviour {
 		transform.parent = null;
         yield return true;
         //yield return new WaitForSeconds(2);
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         Destroy(gameObject);
         // Debug.Log(transform.position);
     }

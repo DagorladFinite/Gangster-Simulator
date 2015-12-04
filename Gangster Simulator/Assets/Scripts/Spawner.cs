@@ -30,6 +30,14 @@ public class Spawner : MonoBehaviour {
 	void Update () {
 		
 	}
+	public void change() {
+		transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = cares[Random.Range (0,16)];
+		transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
+		int Posx = Random.Range(-6, 6);
+		Vector2 pos = new Vector2(Posx+Random.Range(-0.2f,0.2f),transform.position.y);
+		transform.position = pos;
+
+	}
     /*
     public void Spawn()
     {

@@ -21,6 +21,7 @@ public class Click : MonoBehaviour {
 	public UnityEngine.CanvasGroup po;
 	public UnityEngine.CanvasGroup pu;
 	public Feedbacker Feedbacker;
+	public BuildingSpawner BS;
     public SpawnManager SpawnManager;
 
 	public bool popup1 = false; 
@@ -36,8 +37,10 @@ public class Click : MonoBehaviour {
 	public GameObject feedback;
     private List<GameObject> pjs;
     private GameObject[] pjss;
+	private GameObject[] pjss2;
 	GameObject fed;
-
+	int p = 0;
+	public float multiplier = 1.0f;
 
 	void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -51,7 +54,7 @@ public class Click : MonoBehaviour {
 
 	void Update(){
 		GoldDisplay.text = "Money: " + gold.ToString("F0") + " filthy coins";
-		mpc.text = goldperclick + " Money/click";
+		mpc.text = goldperclick*multiplier + " Money/click";
 		checkifpopup1 ();
 		checkifpopup2 ();
 		if (Input.GetKeyDown ("escape")) {
@@ -71,6 +74,16 @@ public class Click : MonoBehaviour {
 		if (Input.GetKey ("l")) {
 			load ();
 		}
+
+		switch (BS.day) {
+		case 0:
+			multiplier = 1.1f;
+			break;
+		case 1:
+			multiplier = 0.8f;
+			break;
+
+		}
 	}
 
    public void Calc()
@@ -80,23 +93,43 @@ public class Click : MonoBehaviour {
         {
             pjs.Add(obj);
         }
+		pjss2 = GameObject.FindGameObjectsWithTag("Inactive") as GameObject[];
+		foreach (GameObject obj in pjss2)
+		{
+			pjs.Add(obj);
+			obj.SetActive(false);
+		}
+
+		Debug.Log(pjs.ToArray().Length);
+		/*
+		foreach (GameObject obj in pjss)
+		{
+			obj.SetActive(false);
+			pjs.Add(obj);
+		}
+		*/
     }
 
 	public void Clicked(){
 		if (canclick == true) {
           
-            gold += goldperclick;
+            gold += goldperclick * multiplier;
 			Feedbacker.Spawn();
-            pjs[0].GetComponent<MovementCos>().StartMove();
-            pjs.RemoveAt(0);
-            Debug.Log(pjs.ToArray().Length);
+
+				pjs[p].GetComponent<MovementCos>().StartMove();
+				pjs[pjs.Count-1-p].SetActive(true);
+				pjs[pjs.Count-1-p].GetComponent<Spawner>().change();
+				pjs[pjs.Count-1-p].transform.SetParent(SpawnManager.transform);
+			p = p+1;
+			if (p==10)
+				p = 0;
+            
+            //pjs.RemoveAt(0);
+            Debug.Log(p);
             //SpawnManager.Spawn();
-             pjs.Add(SpawnManager.Spawn());
+            // pjs.Add(SpawnManager.Spawn());
            
 		}
-
-	}
-	void OnGUI() {
 
 	}
 

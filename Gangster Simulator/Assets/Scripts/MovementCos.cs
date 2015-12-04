@@ -37,12 +37,15 @@ public class MovementCos : MonoBehaviour {
         }
 		transform.parent = null;
         yield return true;
+		gameObject.SetActive(false);
         //yield return new WaitForSeconds(2);
+		/*
         foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }
         Destroy(gameObject);
+        */
         // Debug.Log(transform.position);
     }
 

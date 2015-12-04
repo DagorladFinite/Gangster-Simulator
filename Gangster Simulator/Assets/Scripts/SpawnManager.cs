@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnManager : MonoBehaviour {
 
 	public GameObject Pj;
-	 float Posx;
+	 float Posx = 7;
 	public int max_quantity;
     public Click click;
     //Spawner spawny;
@@ -21,14 +21,27 @@ public class SpawnManager : MonoBehaviour {
 		*/
 		
 		for (int i = 0; i<max_quantity; i++) {
-            Posx = Random.Range(-6, 6);
+           // Posx = Random.Range(-6, 6);
+
             //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
-            Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+           // Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+			Pj = Instantiate (Pj,new Vector3(Posx,transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
            // Pj.GetComponentInChildren<Spawner>().Spawn();
             Pj.transform.SetParent(transform);
-			//Posx = Posx+0.2f;
+			Posx = Posx+0.2f;
 		
 		}
+		for (int i = 0; i<max_quantity; i++) {
+			//Posx = Random.Range(-6, 6);
+			//Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
+			Pj = Instantiate (Pj,new Vector3(Posx,transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+			// Pj.GetComponentInChildren<Spawner>().Spawn();
+			Pj.transform.SetParent(transform);
+			//Posx = Posx+0.2f;
+			Pj.tag = "Inactive";
+			//Posx = Posx+0.2f;
+		}
+
         click.Calc();
 	}
 	
@@ -38,12 +51,13 @@ public class SpawnManager : MonoBehaviour {
 	}
 
     public GameObject Spawn() {
-        Posx = Random.Range(-6, 6);
+       // Posx = Random.Range(-6, 6);
         //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
 		Pj = Instantiate(Pj, new Vector3(Posx, transform.position.y+0.5f, 0.0f), transform.rotation) as GameObject;
         //Pj.GetComponentInChildren<Spawner>().Spawn();
         Pj.transform.localScale = new Vector3(1, 1, 1);
         Pj.transform.SetParent(transform);
+		Posx = Posx+0.2f;
         //Posx = Posx+0.2f;
         return Pj;
     }

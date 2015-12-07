@@ -41,8 +41,9 @@ public class Click : MonoBehaviour {
 	GameObject fed;
 	int p = 0;
 	public float multiplier = 1.0f;
+    public float multiplier2 = 1.0f;
 
-	void Start(){
+    void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
         pjs = new List<GameObject>();
@@ -78,10 +79,12 @@ public class Click : MonoBehaviour {
 		switch (BS.day) {
 		case 0:
 			multiplier = 1.1f;
+            multiplier2 = 0.8f;
 			break;
 		case 1:
 			multiplier = 0.8f;
-			break;
+            multiplier2 = 1.1f;
+            break;
 
 		}
 	}
@@ -92,22 +95,10 @@ public class Click : MonoBehaviour {
         foreach (GameObject obj in pjss)
         {
             pjs.Add(obj);
+            Debug.Log(pjs.ToArray().Length);
         }
-		pjss2 = GameObject.FindGameObjectsWithTag("Inactive") as GameObject[];
-		foreach (GameObject obj in pjss2)
-		{
-			pjs.Add(obj);
-			obj.SetActive(false);
-		}
+        Debug.Log(pjs.ToArray().Length);
 
-		Debug.Log(pjs.ToArray().Length);
-		/*
-		foreach (GameObject obj in pjss)
-		{
-			obj.SetActive(false);
-			pjs.Add(obj);
-		}
-		*/
     }
 
 	public void Clicked(){
@@ -116,16 +107,23 @@ public class Click : MonoBehaviour {
             gold += goldperclick * multiplier;
 			Feedbacker.Spawn();
 
-				pjs[p].GetComponent<MovementCos>().StartMove();
-				pjs[pjs.Count-1-p].SetActive(true);
-				pjs[pjs.Count-1-p].GetComponent<Spawner>().change();
-				pjs[pjs.Count-1-p].transform.SetParent(SpawnManager.transform);
-			p = p+1;
-			if (p==10)
-				p = 0;
-            
-            //pjs.RemoveAt(0);
-            Debug.Log(p);
+            if (pjs.Count < 5)
+            {
+                SpawnManager.Spawnerd();
+            }
+            //Debug.Log(pjs[0]);
+            int random = UnityEngine.Random.Range(0, 100);
+            if (pjs[0] != null && random>85)
+            {
+                pjs[0].GetComponent<MovementCos>().StartMove();
+                pjs.RemoveAt(0);
+            }
+            else if (pjs[0] == null)
+            {
+                pjs = new List<GameObject>();
+                Calc();
+            }
+            //Debug.Log(p);
             //SpawnManager.Spawn();
             // pjs.Add(SpawnManager.Spawn());
            

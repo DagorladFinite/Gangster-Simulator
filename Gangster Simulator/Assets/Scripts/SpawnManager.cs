@@ -31,6 +31,7 @@ public class SpawnManager : MonoBehaviour {
 			Posx = Posx+0.2f;
 		
 		}
+        /*
 		for (int i = 0; i<max_quantity; i++) {
 			//Posx = Random.Range(-6, 6);
 			//Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
@@ -41,9 +42,27 @@ public class SpawnManager : MonoBehaviour {
 			Pj.tag = "Inactive";
 			//Posx = Posx+0.2f;
 		}
-
+        */
         click.Calc();
 	}
+    public void Spawnerd()
+    {
+        Posx = 7;
+        for (int i = 0; i<max_quantity; i++) {
+           // Posx = Random.Range(-6, 6);
+
+            //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
+           // Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+			GameObject test = Instantiate(Pj,new Vector3(Posx, transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+           // Pj.GetComponentInChildren<Spawner>().Spawn();
+            test.transform.SetParent(transform);
+            test.transform.localScale = new Vector3(1, 1, 1);
+			Posx = Posx+0.2f;
+            test.tag = "Character";
+		
+		}
+        click.Calc();
+    }
 	
 	// Update is called once per frame
 	void Update () {

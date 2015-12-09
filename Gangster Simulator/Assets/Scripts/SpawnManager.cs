@@ -25,9 +25,10 @@ public class SpawnManager : MonoBehaviour {
 
             //Pj = Instantiate (Pj,new Vector3(Posx,183.65f,0.0f),transform.rotation) as GameObject;
            // Pj = Instantiate (Pj,new Vector3(Posx+Random.Range(-0.2f,0.2f),transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
-			Pj = Instantiate (Pj,new Vector3(Posx,transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
+			GameObject Pej;
+			Pej = Instantiate (Pj,new Vector3(Posx,transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
            // Pj.GetComponentInChildren<Spawner>().Spawn();
-            Pj.transform.SetParent(transform);
+            Pej.transform.SetParent(transform);
 			Posx = Posx+0.2f;
 		
 		}

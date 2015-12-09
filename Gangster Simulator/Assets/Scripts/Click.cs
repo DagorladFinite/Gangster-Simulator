@@ -23,6 +23,8 @@ public class Click : MonoBehaviour {
 	public Feedbacker Feedbacker;
 	public BuildingSpawner BS;
     public SpawnManager SpawnManager;
+	public DateTime date;
+	public TimeSpan difference;
 
 	public bool popup1 = false; 
 	public bool popup2 = false; 
@@ -47,6 +49,8 @@ public class Click : MonoBehaviour {
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
         pjs = new List<GameObject>();
+		date = System.DateTime.Now;
+		Debug.Log (date);
         //Calc();
 
     }
@@ -95,9 +99,9 @@ public class Click : MonoBehaviour {
         foreach (GameObject obj in pjss)
         {
             pjs.Add(obj);
-            Debug.Log(pjs.ToArray().Length);
+            //Debug.Log(pjs.ToArray().Length);
         }
-        Debug.Log(pjs.ToArray().Length);
+       // Debug.Log(pjs.ToArray().Length);
 
     }
 
@@ -112,8 +116,8 @@ public class Click : MonoBehaviour {
                 SpawnManager.Spawnerd();
             }
             //Debug.Log(pjs[0]);
-            int random = UnityEngine.Random.Range(0, 100);
-            if (pjs[0] != null && random>85)
+            int random = UnityEngine.Random.Range(0, 30);
+            if (pjs[0] != null && random>20)
             {
                 pjs[0].GetComponent<MovementCos>().StartMove();
                 pjs.RemoveAt(0);
@@ -185,17 +189,18 @@ public class Click : MonoBehaviour {
 		for (int i=0; i<upgrades.Length; i++) {
 			Upgrades upgrade = new Upgrades ();
 			ItemManager script = upgrades[i].GetComponent<ItemManager>();
-			Debug.Log ("I: " +  i);
-			Debug.Log ("Script id: "+ script.id);
-			Debug.Log ("Script count: "+ script.count);
+			//Debug.Log ("I: " +  i);
+			//Debug.Log ("Script id: "+ script.id);
+			//Debug.Log ("Script count: "+ script.count);
 			upgrade.id = script.id;
 			upgrade.amount = script.count;
 			data.upg.Add(upgrade);	
 
-			Debug.Log ("Upgrade id: " + upgrade.id);
-			Debug.Log ("Upgrade amount: " + upgrade.amount);
+			//Debug.Log ("Upgrade id: " + upgrade.id);
+			//Debug.Log ("Upgrade amount: " + upgrade.amount);
 
 		}
+		data.date = date.ToBinary().ToString();
 		data.upg.ToArray ();
 		data.itemsz.ToArray ();
 		bf.Serialize (file, data);
@@ -236,10 +241,25 @@ public class Click : MonoBehaviour {
 				
 
 			}
+			long temp = Convert.ToInt64(data.date);
+			DateTime oldDate = DateTime.FromBinary(temp);
+			difference = date.Subtract(oldDate);
+			Debug.Log("Difference: " + difference);
+			Offline ();
+
 		}
 		}
 	public void cheat(){
 		gold = gold + 10000;
+	}
+
+	public void Offline(){
+		if (difference.TotalSeconds > 10 && difference.TotalSeconds < 20) {
+			gold = gold + 1000;
+		} else if (difference.TotalSeconds > 20) {
+			gold = gold + 10000;
+		}
+	
 	}
 
 	public void settings(){
@@ -318,6 +338,7 @@ class PlayerData
 	public float gold;
 	public int goldperclick;
 	public double karma;
+	public String date;
 	public List<Items> itemsz = new List<Items> ();
 	public List<Labels> labs = new List<Labels> ();
 	public List<Upgrades> upg = new List<Upgrades> ();

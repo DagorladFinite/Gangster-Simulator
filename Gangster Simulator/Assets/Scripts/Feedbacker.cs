@@ -24,7 +24,10 @@ public class Feedbacker : MonoBehaviour {
 		//fed = Instantiate(feedback, new Vector2 (Input.mousePosition.x-300,Input.mousePosition.y-450), Quaternion.identity)as GameObject;
 		fed = Instantiate(feedback, new Vector2 (bar.transform.position.x, bar.transform.position.y), Quaternion.identity)as GameObject;
 		fed.transform.SetParent(transform, false);
-		fed.GetComponent<Feedback> ().input = click.goldperclick.ToString();
+		float result = click.goldperclick * click.multiplier;
+		fed.GetComponent<Feedback> ().input = result.ToString();
+
+
 		//Debug.Log (Input.mousePosition);
 	
 	}

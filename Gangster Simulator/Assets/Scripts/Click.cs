@@ -18,6 +18,7 @@ public class Click : MonoBehaviour {
 	public UnityEngine.UI.ScrollRect SR;
 	public UnityEngine.UI.ScrollRect SR2;
 	public UnityEngine.CanvasGroup pp;
+	public UnityEngine.CanvasGroup pp2;
 	public UnityEngine.CanvasGroup po;
 	public UnityEngine.CanvasGroup pu;
 	public Feedbacker Feedbacker;
@@ -275,6 +276,21 @@ public class Click : MonoBehaviour {
 		pp.alpha = 100;
 		pp.blocksRaycasts = true;
 		pp.interactable = true;
+		canclick = false;
+	}
+	public void broker(){
+		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+		for (int i= 0; i<pjs.Length; i++) {
+			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+			foreach (SpriteRenderer rnd in rend)
+				rnd.enabled = false;
+			
+			
+		}
+		set = true;
+		pp2.alpha = 100;
+		pp2.blocksRaycasts = true;
+		pp2.interactable = true;
 		canclick = false;
 	}
 

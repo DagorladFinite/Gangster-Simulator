@@ -36,7 +36,7 @@ public class MovementCos : MonoBehaviour {
 
         }
 		transform.parent = null;
-        yield return true;
+        
 		//gameObject.SetActive(false);
        // yield return new WaitForSeconds(1);
 		
@@ -45,7 +45,7 @@ public class MovementCos : MonoBehaviour {
             GameObject.Destroy(child.gameObject);
         }
         Destroy(gameObject);
-        
+		yield return true;
         // Debug.Log(transform.position);
     }
 

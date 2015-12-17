@@ -9,11 +9,15 @@ public class Deals : MonoBehaviour {
 	public float karmaGainNegative;
 	public float multiplier;
 	public Broker broker;
+	public float cooldown;
+	public float timer;
+	public bool cd;
 	float time;
 
 	// Use this for initialization
 	void Start () {
-	
+		timer = Time.time;
+		cd = true;
 	}
 	
 	// Update is called once per frame
@@ -22,38 +26,47 @@ public class Deals : MonoBehaviour {
 	}
 
 	public void positive(){
-		if (click.gold >= positiveCost) {
+		if (click.gold >= positiveCost && cd == true ) {
+			time = 10.0f;
+			cd = false;
+			timer = Time.time + time;
 			click.gold = click.gold - positiveCost;
 			click.karma = click.karma + karmaGainPositive;
-			time = 10.0f;
 			StartCoroutine(Deal (1, time, multiplier,positiveCost));
 			broker.Return();
+			//cd= false;
 	
 		}
 	}
 
 	public void negative(){
-		if (click.gold >= negativeCost) {
+		if (click.gold >= negativeCost && cd == true ) {
+			time = 10.0f;
+			cd = false;
+			timer = Time.time + time;
 			click.gold = click.gold - negativeCost;
 			click.karma = click.karma - karmaGainNegative;
-			time = 10.0f;
 			StartCoroutine(Deal (2, time, multiplier,negativeCost));
 			broker.Return();
+
 			
 		}
 	}
 
 	IEnumerator Deal(int type, float time, float multiplier, float cost){
-	
+		Debug.Log ("Hola");
 		float i = 0.0f;
 		float rate = 1.0f / time;
 		while (i < time) {
+			Debug.Log ("Guac");
 			i += Time.deltaTime * rate;
 			yield return new WaitForSeconds(0.00002f);
 			//Debug.Log (i);
 		}
-		//Debug.Log ("Hola");
+		Debug.Log ("Hola");
 		click.gold = click.gold + (cost * multiplier);
+		cd = true;
+		//timer = Time.time;
 		yield return true;
 	}
 }

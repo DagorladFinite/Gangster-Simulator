@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Broker.cs" />
      <Compile Include="Assets\Scripts\BuildingSpawner.cs" />
+     <Compile Include="Assets\Scripts\ButtonColor.cs" />
      <Compile Include="Assets\Scripts\Click.cs" />
      <Compile Include="Assets\Scripts\Deals.cs" />
      <Compile Include="Assets\Scripts\Feedback.cs" />

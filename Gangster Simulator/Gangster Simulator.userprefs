@@ -1,12 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Deals.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ButtonColor.cs">
     <Files>
-      <File FileName="Assets\Scripts\Deals.cs" Line="36" Column="3" />
-      <File FileName="Assets\Scripts\Click.cs" Line="293" Column="6" />
+      <File FileName="Assets\Scripts\ButtonColor.cs" Line="21" Column="4" />
+      <File FileName="Assets\Scripts\Deals.cs" Line="15" Column="9" />
+      <File FileName="Assets\Scripts\Click.cs" Line="362" Column="1" />
       <File FileName="Assets\Scripts\Settings.cs" Line="35" Column="1" />
       <File FileName="Assets\Scripts\Broker.cs" Line="34" Column="2" />
-      <File FileName="Assets\Scripts\ItemManager.cs" Line="26" Column="2" />
+      <File FileName="Assets\Scripts\ItemManager.cs" Line="49" Column="1" />
       <File FileName="Assets\Scripts\MovementCos.cs" Line="53" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

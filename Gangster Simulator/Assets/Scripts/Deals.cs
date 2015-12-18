@@ -12,7 +12,7 @@ public class Deals : MonoBehaviour {
 	public float cooldown;
 	public float timer;
 	public bool cd;
-	float time;
+	public float time;
 
 	// Use this for initialization
 	void Start () {

@@ -23,8 +23,9 @@ public class ButtonColor : MonoBehaviour {
 		} else {
 			GetComponent<Image> ().color = stand;
 			GetComponentInChildren<Text> ().enabled = true;
-			time = time - (1/deals.time);
-			GetComponentInChildren<Text> ().text = time.ToString();
+            float rate = 1.0f / 10.0f;
+            time = time - Time.deltaTime * rate; 
+			GetComponentInChildren<Text> ().text = (time*1000/60).ToString();
 		}
 	}
 }

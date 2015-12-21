@@ -58,12 +58,10 @@ public class Deals : MonoBehaviour {
 		float i = 0.0f;
 		float rate = 1.0f / time;
 		while (i < time) {
-			Debug.Log ("Guac");
 			i += Time.deltaTime * rate;
 			yield return new WaitForSeconds(0.00002f);
 			//Debug.Log (i);
 		}
-		Debug.Log ("Hola");
 		click.gold = click.gold + (cost * multiplier);
 		cd = true;
 		//timer = Time.time;

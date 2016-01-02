@@ -7,8 +7,9 @@ public class Feedbacker : MonoBehaviour {
     public GameObject bar;
     public Click click;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

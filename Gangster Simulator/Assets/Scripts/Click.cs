@@ -47,6 +47,7 @@ public class Click : MonoBehaviour {
     public float multiplier2 = 1.0f;
     public float duration;
     public float magnitude;
+    public bool shake;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -135,8 +136,10 @@ public class Click : MonoBehaviour {
             // pjs.Add(SpawnManager.Spawn());
            
 		}
-        StartCoroutine(Shake());
-
+        if (shake == true)
+        {
+            StartCoroutine(Shake());
+        }
 	}
 
 

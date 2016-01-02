@@ -45,6 +45,8 @@ public class Click : MonoBehaviour {
 	int p = 0;
 	public float multiplier = 1.0f;
     public float multiplier2 = 1.0f;
+    public float duration;
+    public float magnitude;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -133,6 +135,7 @@ public class Click : MonoBehaviour {
             // pjs.Add(SpawnManager.Spawn());
            
 		}
+        StartCoroutine(Shake());
 
 	}
 
@@ -323,6 +326,35 @@ public void popups(){
 		pu.interactable = true;
 		canclick = false;
 	}
+
+    IEnumerator Shake()
+    {
+
+        float elapsed = 0.0f;
+
+        Vector3 originalCamPos = Camera.main.transform.position;
+
+        while (elapsed < duration)
+        {
+
+            elapsed += Time.deltaTime;
+
+            float percentComplete = elapsed / duration;
+            float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+            // map value to [-1, 1]
+            float x = UnityEngine.Random.value * 2.0f - 1.0f;
+            float y = UnityEngine.Random.value * 2.0f - 1.0f;
+            x *= magnitude * damper;
+            y *= magnitude * damper;
+
+            Camera.main.transform.position = new Vector3(x, y, originalCamPos.z);
+
+            yield return null;
+        }
+
+        Camera.main.transform.position = originalCamPos;
+    }
 }
 
 

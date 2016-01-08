@@ -36,19 +36,19 @@ public class BuildingSpawner : MonoBehaviour {
 		//GameObject[] buildings;
 
 
-		float off = (20 / num_buildings);
+		float off = (22 / num_buildings);
 		float position = off-12;
 		int counter = 0;
 		for (int i = 0; i<num_buildings; i++) {
 				//float Posy = Random.Range (2.5f, 5.0f);
-				float Posx = Random.Range (-0.2f, 0.2f);
+				float Posx = Random.Range (-0.02f, 0.02f);
 				Building = Instantiate (Building, new Vector3 (position + Posx, 1.7f, 0), Building.transform.rotation) as GameObject;
 				Building2 = Instantiate (Building2, new Vector3 (position + Posx, 1.7f, 0), Building.transform.rotation) as GameObject;
 				Building3 = Instantiate (Building3, new Vector3 (position + Posx, 1.7f, 0), Building.transform.rotation) as GameObject;
 				//float Range = Random.Range(2,4);
-				Building.transform.localScale = new Vector3 (1,1,1);
-				Building2.transform.localScale = new Vector3 (1,1,1);
-				Building3.transform.localScale = new Vector3 (1,1,1);
+				Building.transform.localScale = new Vector3 (0.8f,0.8f,0.8f);
+			Building2.transform.localScale = new Vector3 (0.8f,0.8f,0.8f);
+			Building3.transform.localScale = new Vector3 (0.8f,0.8f,0.8f);
 				int sprite= Random.Range (0,Buildings.Length);
 
 				if (sprite == 4 && counter <=2)
@@ -75,7 +75,7 @@ public class BuildingSpawner : MonoBehaviour {
 			}
 				Building.transform.SetParent(transform);
 				Building2.transform.SetParent(transform);
-			Building3.transform.SetParent(transform);
+				Building3.transform.SetParent(transform);
 				position = position+off;
 				//buildings[i] = Building;
 			}

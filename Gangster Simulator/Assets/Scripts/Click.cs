@@ -12,7 +12,7 @@ public class Click : MonoBehaviour {
 
 	public UnityEngine.UI.Text GoldDisplay;
 	public UnityEngine.UI.Text mpc;
-	public float gold = 0.00f;
+	public double gold = 0;
 	public int goldperclick = 1;
 	public double karma = 0;
 	public UnityEngine.UI.ScrollRect SR;
@@ -54,15 +54,17 @@ public class Click : MonoBehaviour {
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
         pjs = new List<GameObject>();
 		date = System.DateTime.Now;
-		Debug.Log (date);
+		//Debug.Log (date);
         //Calc();
+		Save ();
 
     }
 
 	//GUI.Button(new Rect(10, 20, 100, 20), "Hello World");
 
 	void Update(){
-		GoldDisplay.text = "Money: " + gold.ToString("F0") + " filthy coins";
+		GoldDisplay.text = "Money: " + FormatNumber (gold);
+			//gold.ToString("F0") ;
 		mpc.text = goldperclick*multiplier + " Money/click";
 		checkifpopup1 ();
 		checkifpopup2 ();
@@ -95,6 +97,17 @@ public class Click : MonoBehaviour {
             break;
 
 		}
+	}
+	private string  FormatNumber(double value)
+	{
+		string[]  suffixes = new string[] {" K", " M", " B", " T", " Q"};
+		for (int j = suffixes.Length;  j > 0;  j--)
+		{
+			double  unit = Math.Pow(1000, j);
+			if (value >= unit)
+				return (value / unit).ToString("#,##0.0") + suffixes[--j];
+		}
+		return value.ToString("#,##0");
 	}
 
    public void Calc()
@@ -386,7 +399,7 @@ public class Labels
 [Serializable]
 class PlayerData
 {
-	public float gold;
+	public double gold;
 	public int goldperclick;
 	public double karma;
 	public String date;

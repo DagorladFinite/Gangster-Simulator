@@ -21,6 +21,7 @@ public class Click : MonoBehaviour {
 	public UnityEngine.CanvasGroup pp2;
 	public UnityEngine.CanvasGroup po;
 	public UnityEngine.CanvasGroup pu;
+	public UnityEngine.CanvasGroup bar;
 	public Feedbacker Feedbacker;
 	public BuildingSpawner BS;
     public SpawnManager SpawnManager;
@@ -48,6 +49,7 @@ public class Click : MonoBehaviour {
     public float duration;
     public float magnitude;
     public bool shake;
+	bool barshow = false;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -97,6 +99,22 @@ public class Click : MonoBehaviour {
             break;
 
 		}
+	}
+	public void barr(){
+		if (barshow == false) {
+			bar.alpha = 100;
+			bar.blocksRaycasts = true;
+			bar.interactable = true;
+			barshow = true;
+		}
+		if (barshow == true) {
+			bar.alpha = 0;
+			bar.blocksRaycasts = false;
+			bar.interactable = false;
+			barshow = false;
+		}
+
+
 	}
 	private string  FormatNumber(double value)
 	{
@@ -165,7 +183,7 @@ public class Click : MonoBehaviour {
 			//canclick = false;
 			Time.timeScale = 0;
 			SR.enabled = false;
-			SR2.enabled = false;
+			//SR2.enabled = false;
 			popups();
 		} 
 
@@ -180,7 +198,7 @@ public class Click : MonoBehaviour {
 			//canclick = false;
 			Time.timeScale = 0;
 			SR.enabled = false;
-			SR2.enabled = false;
+			//SR2.enabled = false;
 			popups2();
 		}
 	}

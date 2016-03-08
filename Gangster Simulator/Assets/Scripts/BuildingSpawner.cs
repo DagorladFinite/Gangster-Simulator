@@ -42,13 +42,13 @@ public class BuildingSpawner : MonoBehaviour {
 		for (int i = 0; i<num_buildings; i++) {
 				//float Posy = Random.Range (2.5f, 5.0f);
 				float Posx = Random.Range (-0.02f, 0.02f);
-				Building = Instantiate (Building, new Vector3 (position + Posx, 3.0f, 0), Building.transform.rotation) as GameObject;
-				Building2 = Instantiate (Building2, new Vector3 (position + Posx, 3.0f, 0), Building.transform.rotation) as GameObject;
-				Building3 = Instantiate (Building3, new Vector3 (position + Posx, 3.0f, 0), Building.transform.rotation) as GameObject;
+				Building = Instantiate (Building, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
+				Building2 = Instantiate (Building2, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
+				Building3 = Instantiate (Building3, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
 				//float Range = Random.Range(2,4);
 				Building.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
-			Building2.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
-			Building3.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
+				Building2.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
+				Building3.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
 				int sprite= Random.Range (0,Buildings.Length);
 
 				if (sprite == 4 && counter <=2)

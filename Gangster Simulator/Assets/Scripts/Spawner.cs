@@ -16,10 +16,10 @@ public class Spawner : MonoBehaviour {
 		
 	
 			//Posx = Random.Range (625.0f, 640.0f);
-		GameObject cares1 = Instantiate (Cara,new Vector3(transform.position.x,transform.position.y - 0.20f,transform.position.z),transform.rotation) as GameObject;
+		GameObject cares1 = Instantiate (Cara,new Vector3(transform.position.x,transform.position.y ,transform.position.z),transform.rotation) as GameObject;
 			cares1.GetComponent<SpriteRenderer>().sprite = cares[Random.Range (0,16)];
 			cares1.transform.SetParent(transform);
-        GameObject cossos1 = Instantiate (Cos,new Vector3(transform.position.x,transform.position.y - 0.40f,transform.position.z),transform.rotation) as GameObject;
+        GameObject cossos1 = Instantiate (Cos,new Vector3(transform.position.x,transform.position.y-0.30f,transform.position.z),transform.rotation) as GameObject;
 			cossos1.GetComponent<SpriteRenderer>().sprite = cossos[Random.Range (0,8)];
 			cossos1.transform.SetParent(transform);
         

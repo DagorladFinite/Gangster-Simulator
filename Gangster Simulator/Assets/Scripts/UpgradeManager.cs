@@ -14,7 +14,7 @@ public class UpgradeManager : MonoBehaviour {
 	public Color aff;
 	public int id;
 	private float _baseCost;
-
+	//public int buyings = 0;
 
 	
 	void Awake()
@@ -43,6 +43,14 @@ public class UpgradeManager : MonoBehaviour {
 			count += 1;
 			click.goldperclick += clickPower;
 			cost =Mathf.Round( _baseCost* Mathf.Pow (1.15f, count));
+			click.buyings++;
+
+			if (click.buyings == 10 && click.pis_current< click.pisos.Length)
+			{
+				click.pisos[click.pis_current].SetActive(true);
+				click.pis_current++;
+				click.buyings = 0;
+			}
 		}
 	}
 

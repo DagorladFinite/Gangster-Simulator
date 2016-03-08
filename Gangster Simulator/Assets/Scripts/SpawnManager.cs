@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnManager : MonoBehaviour {
 
 	public GameObject Pj;
-	 float Posx = 7;
+	 float Posx = 15;
 	public int max_quantity;
     public Click click;
     //Spawner spawny;
@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour {
 	}
     public void Spawnerd()
     {
-        Posx = 7;
+        Posx = 15;
         for (int i = 0; i<max_quantity; i++) {
            // Posx = Random.Range(-6, 6);
 

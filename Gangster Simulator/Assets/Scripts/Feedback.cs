@@ -11,7 +11,7 @@ public class Feedback : MonoBehaviour {
 	public double input;
     private GameObject meta;
     public float time;
-	int duracio = 75;
+	int duracio = 20;
 	int dur = 100;
 	public int SortLayer = 0;
 	//public int SortingLayerID = SortingLayer.GetLayerValueFromName("Pjs");

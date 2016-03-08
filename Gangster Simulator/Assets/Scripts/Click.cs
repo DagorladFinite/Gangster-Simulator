@@ -49,7 +49,10 @@ public class Click : MonoBehaviour {
     public float duration;
     public float magnitude;
     public bool shake;
+	public GameObject[] pisos;
 	bool barshow = false;
+	public int pis_current = 0;
+	public int buyings = 0;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -59,6 +62,10 @@ public class Click : MonoBehaviour {
 		//Debug.Log (date);
         //Calc();
 		Save ();
+
+		for (int i = 0; i < pisos.Length; i++) {
+			pisos[i].SetActive(false);
+		}
 
     }
 
@@ -102,16 +109,18 @@ public class Click : MonoBehaviour {
 	}
 	public void barr(){
 		if (barshow == false) {
-			bar.alpha = 100;
+			bar.alpha = 1;
 			bar.blocksRaycasts = true;
 			bar.interactable = true;
 			barshow = true;
+			Debug.Log("Enabled");
 		}
-		if (barshow == true) {
+		else if (barshow == true) {
 			bar.alpha = 0;
 			bar.blocksRaycasts = false;
 			bar.interactable = false;
 			barshow = false;
+			Debug.Log("Disabled");
 		}
 
 
@@ -243,6 +252,34 @@ public class Click : MonoBehaviour {
 		data.itemsz.ToArray ();
 		bf.Serialize (file, data);
 		file.Close ();
+	}
+
+	public void Reset(){
+		gold = 0;
+		goldperclick = 1;
+		karma = 0;
+	
+
+		for (int i=0; i<items.Length; i++) {
+			UpgradeManager script = items [i].GetComponent<UpgradeManager> ();
+			//script.id = data.itemsz [i].id;
+			script.count = 0;
+		}
+
+		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
+		
+		for (int i=0; i<upgrades.Length; i++) {
+			for (int j=0; j<upgrades.Length;j++){
+				ItemManager script = upgrades [j].GetComponent<ItemManager> ();
+
+					script.count = 0;
+					//Debug.Log (script.count);
+				}
+			}
+			
+			
+
+	
 	}
 
 	public void load()

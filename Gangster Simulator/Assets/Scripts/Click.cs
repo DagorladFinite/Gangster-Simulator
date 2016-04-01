@@ -277,7 +277,9 @@ public class Click : MonoBehaviour {
 				}
 			}
 			
-			
+		for (int i = 0; i < pisos.Length; i++) {
+			pisos[i].SetActive(false);
+		}
 
 	
 	}

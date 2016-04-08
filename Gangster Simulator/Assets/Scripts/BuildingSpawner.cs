@@ -4,6 +4,7 @@ using System.Collections;
 public class BuildingSpawner : MonoBehaviour {
 
 	public GameObject Building;
+	public SpriteRenderer cam;
 	public GameObject Building2;
 	public GameObject Building3;
 	public Sprite[] Buildings;
@@ -28,6 +29,7 @@ public class BuildingSpawner : MonoBehaviour {
 	Color orig_color;
 	Color orig_sky;
 	Color orig_nuvol;
+	Color orig_cam;
 	int count = 0;
 	public int day = 0;
 
@@ -149,6 +151,7 @@ public class BuildingSpawner : MonoBehaviour {
 		while(progress < 1)
 		{
 			sky.color = currentColor;
+			cam.color = currentColor;
 			//Debug.Log ("Hola");
 			currentColor = Color.Lerp(orig_sky, skycolor, progress);
 			for (int i = 0; i<num_buildings; i++) {
@@ -186,6 +189,8 @@ public class BuildingSpawner : MonoBehaviour {
 		while(progress < 1)
 		{
 			sky.color = currentColor;
+			cam.color = currentColor;
+			//cam.backgroundColor = currentColor;
 			//Debug.Log ("Hola");
 			currentColor = Color.Lerp(skycolor, orig_sky, progress);
 			for (int i = 0; i<num_buildings; i++) {

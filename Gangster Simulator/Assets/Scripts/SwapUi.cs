@@ -36,7 +36,7 @@ public class SwapUi : MonoBehaviour {
 			img.sprite = sprite;
 			arrowsprite.sprite = aright;
 			Vector2 temp;
-			temp.x = arrow.transform.position.x - 1.5f;
+			temp.x = arrow.transform.position.x - 1.7f;
 			temp.y = arrow.transform.position.y;
 			arrow.transform.position = temp;
 			active = true;
@@ -46,7 +46,7 @@ public class SwapUi : MonoBehaviour {
 			img.sprite = original;
 			arrowsprite.sprite = aleft;
 			Vector2 temp;
-			temp.x = arrow.transform.position.x + 1.5f;
+			temp.x = arrow.transform.position.x + 1.7f;
 			temp.y = arrow.transform.position.y;
 			arrow.transform.position = temp;
 			active = false;

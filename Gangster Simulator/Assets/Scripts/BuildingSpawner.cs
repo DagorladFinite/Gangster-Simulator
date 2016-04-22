@@ -5,6 +5,7 @@ public class BuildingSpawner : MonoBehaviour {
 
 	public GameObject Building;
 	public SpriteRenderer cam;
+	public SpriteRenderer moon;
 	public GameObject Building2;
 	public GameObject Building3;
 	public Sprite[] Buildings;
@@ -154,6 +155,8 @@ public class BuildingSpawner : MonoBehaviour {
 			cam.color = currentColor;
 			//Debug.Log ("Hola");
 			currentColor = Color.Lerp(orig_sky, skycolor, progress);
+			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(0,1,progress));
+
 			for (int i = 0; i<num_buildings; i++) {
 				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
 				//orig_color.a 
@@ -192,6 +195,7 @@ public class BuildingSpawner : MonoBehaviour {
 			cam.color = currentColor;
 			//cam.backgroundColor = currentColor;
 			//Debug.Log ("Hola");
+			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(1,0,progress));
 			currentColor = Color.Lerp(skycolor, orig_sky, progress);
 			for (int i = 0; i<num_buildings; i++) {
 				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);

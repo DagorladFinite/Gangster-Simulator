@@ -12,6 +12,9 @@ public class BuildingSpawner : MonoBehaviour {
 	public Sprite[] Buildings_night;
 	public Sprite[] Buildings_lights;
 	public int num_buildings;
+	public SpriteRenderer[] lamps;
+	public Sprite lamps1;
+	public Sprite lamps2;
 	private GameObject[] buildings2;
 	private GameObject[] buildings3;
 	private GameObject[] buildings4;
@@ -101,6 +104,13 @@ public class BuildingSpawner : MonoBehaviour {
 
 		//sky.color = currentColor;
 	}
+	void Update(){
+	
+
+
+	
+	
+	}
 	/*
 	// Update is called once per frame
 	void Update () {
@@ -179,6 +189,10 @@ public class BuildingSpawner : MonoBehaviour {
 			buildings4 [i].GetComponent<SpriteRenderer> ().color = newColor3;
 		}
 		day = 1;
+		for (int i=0; i<lamps.Length;i++)
+		{
+			lamps[i].sprite = lamps2;
+		}
 		yield return new WaitForSeconds(10);
 		StartCoroutine ("LerpColor2");
 	}
@@ -220,7 +234,13 @@ public class BuildingSpawner : MonoBehaviour {
 		}
 		yield return true;
 		day = 0;
+		for (int i=0; i<lamps.Length;i++)
+		{
+			lamps[i].sprite = lamps1;
+		}
 		yield return new WaitForSeconds(10);
 		StartCoroutine("LerpColor");
 	}
+
+
 }

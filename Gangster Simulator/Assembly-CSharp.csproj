@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\SwapUi.cs" />
      <Compile Include="Assets\Scripts\UpgradeManager.cs" />
+     <Compile Include="Assets\sprite.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity2/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

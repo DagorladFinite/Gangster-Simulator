@@ -9,6 +9,7 @@ public class ItemManager : MonoBehaviour {
 	public UnityEngine.UI.Text mps;
 	public UnityEngine.UI.Text amnt;
 	public UnityEngine.UI.Text name;
+	public Image img;
 	public Click click;
 	public float cost;
 	public int tickValue;
@@ -18,6 +19,8 @@ public class ItemManager : MonoBehaviour {
 	public int id;
 	public Color aff;
 	private float _baseCost;
+	public Sprite original;
+	public Sprite T2;
 
 	void Awake()
 	{
@@ -46,6 +49,10 @@ public class ItemManager : MonoBehaviour {
 			count += 1;
 			cost = Mathf.Round ( _baseCost * Mathf.Pow (1.15f, count));
 
+		}
+		if (count == 10) {
+			
+			img.sprite = T2;
 		}
 	}
 

@@ -12,7 +12,7 @@ public class MoneyPerSec : MonoBehaviour {
 	}
 
 	void Update(){
-		mpsDisplay.text = GetMoneyPerSec () * click.multiplier2 + " Money/sec";
+		mpsDisplay.text = (GetMoneyPerSec () * click.multiplier2 + click.extra) + " Money/sec";
 	}
 
 	public float GetMoneyPerSec(){
@@ -25,7 +25,7 @@ public class MoneyPerSec : MonoBehaviour {
 	}
 
 	public void AutoMoneyPerSec(){
-		click.gold += (GetMoneyPerSec () / 10) * click.multiplier2;
+		click.gold += ((GetMoneyPerSec () / 10) * click.multiplier2) + click.extra;
 	}
 
 	IEnumerator AutoTick(){

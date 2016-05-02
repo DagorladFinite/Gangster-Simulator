@@ -42,6 +42,7 @@ public class Click : MonoBehaviour {
     private List<GameObject> pjs;
     private GameObject[] pjss;
 	private GameObject[] pjss2;
+    public float extra = 0;
 	GameObject fed;
 	int p = 0;
 	public float multiplier = 1.0f;
@@ -53,6 +54,9 @@ public class Click : MonoBehaviour {
 	bool barshow = false;
 	public int pis_current = 0;
 	public int buyings = 0;
+    public Extra extratext;
+
+    public GameObject extrapanel;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -247,6 +251,7 @@ public class Click : MonoBehaviour {
 			//Debug.Log ("Upgrade amount: " + upgrade.amount);
 
 		}
+        data.extra = extra;
 		data.date = date.ToBinary().ToString();
 		data.upg.ToArray ();
 		data.itemsz.ToArray ();
@@ -258,12 +263,14 @@ public class Click : MonoBehaviour {
 		gold = 0;
 		goldperclick = 1;
 		karma = 0;
-	
+        int tempcount2 = 0;
+        int tempcount = 0;
 
 		for (int i=0; i<items.Length; i++) {
 			UpgradeManager script = items [i].GetComponent<UpgradeManager> ();
 			//script.id = data.itemsz [i].id;
 			script.count = 0;
+            tempcount += script.count;
 		}
 
 		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
@@ -271,8 +278,9 @@ public class Click : MonoBehaviour {
 		for (int i=0; i<upgrades.Length; i++) {
 			for (int j=0; j<upgrades.Length;j++){
 				ItemManager script = upgrades [j].GetComponent<ItemManager> ();
-
+                tempcount2 += script.count;
 					script.count = 0;
+                    script.reset();
 					//Debug.Log (script.count);
 				}
 			}
@@ -281,7 +289,9 @@ public class Click : MonoBehaviour {
 			pisos[i].SetActive(false);
 		}
 
-	
+        extra += (tempcount * 0.1f) + (tempcount2 * 0.3f);
+        extratext.Updateextra();
+        extrapanel.SetActive(true);
 	}
 
 	public void load()
@@ -322,6 +332,7 @@ public class Click : MonoBehaviour {
 			DateTime oldDate = DateTime.FromBinary(temp);
 			difference = date.Subtract(oldDate);
 			Debug.Log("Difference: " + difference);
+            extra = data.extra;
 			Offline ();
 
 		}
@@ -459,6 +470,7 @@ class PlayerData
 	public double gold;
 	public int goldperclick;
 	public double karma;
+    public float extra;
 	public String date;
 	public List<Items> itemsz = new List<Items> ();
 	public List<Labels> labs = new List<Labels> ();

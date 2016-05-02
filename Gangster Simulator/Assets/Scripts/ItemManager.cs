@@ -56,6 +56,11 @@ public class ItemManager : MonoBehaviour {
 		}
 	}
 
+    public void reset()
+    {
+        img.sprite = original;
+    }
+
 
 
 	

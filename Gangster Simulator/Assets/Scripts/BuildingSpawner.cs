@@ -13,6 +13,8 @@ public class BuildingSpawner : MonoBehaviour {
 	public Sprite[] Buildings_lights;
 	public int num_buildings;
 	public SpriteRenderer[] lamps;
+	public SpriteRenderer[] bars;
+	public SpriteRenderer street;
 	public Sprite lamps1;
 	public Sprite lamps2;
 	private GameObject[] buildings2;
@@ -34,6 +36,7 @@ public class BuildingSpawner : MonoBehaviour {
 	Color orig_sky;
 	Color orig_nuvol;
 	Color orig_cam;
+	Color street_color;
 	int count = 0;
 	public int day = 0;
 
@@ -98,6 +101,7 @@ public class BuildingSpawner : MonoBehaviour {
 
 		orig_sky = sky.color;
 		orig_nuvol = nuvols [1].GetComponent<SpriteRenderer> ().color;
+		street_color = street.color;
 
 		StartCoroutine("LerpColor");
 
@@ -163,9 +167,15 @@ public class BuildingSpawner : MonoBehaviour {
 		{
 			sky.color = currentColor;
 			cam.color = currentColor;
+			street.color = currentColor;
 			//Debug.Log ("Hola");
 			currentColor = Color.Lerp(orig_sky, skycolor, progress);
 			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(0,1,progress));
+
+			for (int j = 0; j<bars.Length;j++)
+			{
+				bars[j].color = currentColor;
+			}
 
 			for (int i = 0; i<num_buildings; i++) {
 				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
@@ -207,6 +217,11 @@ public class BuildingSpawner : MonoBehaviour {
 		{
 			sky.color = currentColor;
 			cam.color = currentColor;
+			street.color = currentColor;
+			for (int j = 0; j<bars.Length;j++)
+			{
+				bars[j].color = currentColor;
+			}
 			//cam.backgroundColor = currentColor;
 			//Debug.Log ("Hola");
 			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(1,0,progress));

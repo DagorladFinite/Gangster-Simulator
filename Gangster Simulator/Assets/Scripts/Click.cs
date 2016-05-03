@@ -57,6 +57,7 @@ public class Click : MonoBehaviour {
     public Extra extratext;
 
     public GameObject extrapanel;
+	public GameObject credits;
 
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
@@ -70,6 +71,7 @@ public class Click : MonoBehaviour {
 		for (int i = 0; i < pisos.Length; i++) {
 			pisos[i].SetActive(false);
 		}
+
 
     }
 
@@ -215,6 +217,9 @@ public class Click : MonoBehaviour {
 			popups2();
 		}
 	}
+	public void Credits(){
+		credits.SetActive (true);
+	}
 	public void Save(){
 		BinaryFormatter bf = new BinaryFormatter ();
 
@@ -269,8 +274,9 @@ public class Click : MonoBehaviour {
 		for (int i=0; i<items.Length; i++) {
 			UpgradeManager script = items [i].GetComponent<UpgradeManager> ();
 			//script.id = data.itemsz [i].id;
+			tempcount += script.count;
 			script.count = 0;
-            tempcount += script.count;
+           
 		}
 
 		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
@@ -288,10 +294,24 @@ public class Click : MonoBehaviour {
 		for (int i = 0; i < pisos.Length; i++) {
 			pisos[i].SetActive(false);
 		}
-
-        extra += (tempcount * 0.1f) + (tempcount2 * 0.3f);
+		pis_current = 0;
+		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+		for (int i= 0; i<pjs.Length; i++) {
+			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
+			foreach (SpriteRenderer rnd in rend)
+				rnd.enabled = true;
+			
+			
+		}
+		set = false;
+		pp.alpha = 0;
+		pp.blocksRaycasts = false;
+		pp.interactable = false;
+		canclick = true;
+        extra += (tempcount * 0.1f) + (tempcount2 * 0.4f);
+		extrapanel.SetActive(true);
         extratext.Updateextra();
-        extrapanel.SetActive(true);
+        
 	}
 
 	public void load()

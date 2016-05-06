@@ -19,7 +19,7 @@ public class Feedbacker : MonoBehaviour {
 	}
 
 	public void Spawn(){
-		Vector2 mousePos = Input.mousePosition;
+
 		//mousePos.z = 2.0;       // we want 2m away from the camera position
 		//Vector2 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
 		//fed = Instantiate(feedback, new Vector2 (Input.mousePosition.x-300,Input.mousePosition.y-450), Quaternion.identity)as GameObject;

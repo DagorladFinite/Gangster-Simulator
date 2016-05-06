@@ -44,7 +44,7 @@ public class Click : MonoBehaviour {
 	private GameObject[] pjss2;
     public float extra = 0;
 	GameObject fed;
-	int p = 0;
+	//int p = 0;
 	public float multiplier = 1.0f;
     public float multiplier2 = 1.0f;
     public float duration;
@@ -55,6 +55,9 @@ public class Click : MonoBehaviour {
 	public int pis_current = 0;
 	public int buyings = 0;
     public Extra extratext;
+
+	public Popups pop1;
+	public Popups2 pop2;
 
     public GameObject extrapanel;
 	public GameObject credits;
@@ -80,7 +83,7 @@ public class Click : MonoBehaviour {
 	void Update(){
 		GoldDisplay.text = "Money: " + FormatNumber (gold);
 			//gold.ToString("F0") ;
-		mpc.text = goldperclick*multiplier + " Money/click";
+		mpc.text = FormatNumber(goldperclick*multiplier) + " Money/click";
 		checkifpopup1 ();
 		checkifpopup2 ();
 		if (Input.GetKeyDown ("escape")) {
@@ -131,7 +134,7 @@ public class Click : MonoBehaviour {
 
 
 	}
-	private string  FormatNumber(double value)
+	public string  FormatNumber(double value)
 	{
 		string[]  suffixes = new string[] {" K", " M", " B", " T", " Q"};
 		for (int j = suffixes.Length;  j > 0;  j--)
@@ -411,6 +414,7 @@ public void popups(){
 		
 		
 	}
+		pop1.UpdateText ();
 	po.alpha = 100;
 	po.blocksRaycasts = true;
 	po.interactable = true;
@@ -425,6 +429,7 @@ public void popups(){
 			
 			
 		}
+		pop2.UpdateText ();
 		pu.alpha = 100;
 		pu.blocksRaycasts = true;
 		pu.interactable = true;

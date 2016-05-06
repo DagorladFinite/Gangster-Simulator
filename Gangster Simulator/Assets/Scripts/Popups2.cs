@@ -5,6 +5,9 @@ public class Popups2 : MonoBehaviour {
 	
 	public UnityEngine.CanvasGroup pp;
 	public Click click;
+
+	public UnityEngine.UI.Text text;
+	double sub= 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,7 +17,13 @@ public class Popups2 : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
+	public void UpdateText(){
+		sub = click.gold - ((click.gold * 10) / 100);
+		text.text = "Bad boy! The Police requires " + click.FormatNumber (sub) + " of your money";
+		
+	}
+
 	public void Return (){
 		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
 		for (int i= 0; i<pjs.Length; i++) {
@@ -31,7 +40,7 @@ public class Popups2 : MonoBehaviour {
 		click.canclick = true;
 		Time.timeScale = 1;
 		click.SR.enabled = true;
-		click.SR2.enabled = true;
+		//click.SR2.enabled = true;
 		
 	}
 }

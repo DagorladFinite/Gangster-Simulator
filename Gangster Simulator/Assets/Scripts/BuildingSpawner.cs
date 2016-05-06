@@ -5,7 +5,7 @@ public class BuildingSpawner : MonoBehaviour {
 
 	public GameObject Building;
 	public SpriteRenderer cam;
-	public SpriteRenderer moon;
+	public UnityEngine.UI.Button moon;
 	public GameObject Building2;
 	public GameObject Building3;
 	public Sprite[] Buildings;
@@ -29,22 +29,30 @@ public class BuildingSpawner : MonoBehaviour {
 	public Color nuvolcolor;
 	public SpriteRenderer sky;
 	public Color lerpedColor = Color.white;
-	float duration = 10; // This will be your time in seconds.
+	float duration = 25; // This will be your time in seconds.
 	float smoothness = 0.02f; // This will determine the smoothness of the lerp. Smaller values are smoother. Really it's the time between updates.
 	Color currentColor = Color.white;
 	Color orig_color;
 	Color orig_sky;
-	Color orig_nuvol;
+	//Color orig_nuvol;
 	Color orig_cam;
 	Color street_color;
 	int count = 0;
 	public int day = 0;
+	public AudioSource birds;
+	//public AudioSource city;
+	Color moon_orig;
+	int rand;
+	bool redmoon = false;
+	Color moonco = Color.white;
+	private float timer = 0;
+
 
 	// Use this for initialization
 	void Start () {
 		//GameObject[] buildings;
 
-
+		moon_orig = moon.image.color;
 		float off = (22 / num_buildings);
 		float position = off-12;
 		int counter = 0;
@@ -100,7 +108,7 @@ public class BuildingSpawner : MonoBehaviour {
 		orig_color3 = buildings4 [1].GetComponent<SpriteRenderer> ().color;
 
 		orig_sky = sky.color;
-		orig_nuvol = nuvols [1].GetComponent<SpriteRenderer> ().color;
+		//orig_nuvol = nuvols [1].GetComponent<SpriteRenderer> ().color;
 		street_color = street.color;
 
 		StartCoroutine("LerpColor");
@@ -111,52 +119,45 @@ public class BuildingSpawner : MonoBehaviour {
 	void Update(){
 	
 
+		rand = Random.Range (0, 1000);
+		if (rand <= 5 && day == 1 && redmoon == false) {
+			timer = Time.time;
+			moon.image.color = Color.red;
+			redmoon = true;
+			StopCoroutine ("LerpColor");
+			StopCoroutine ("LerpColor2");
 
-	
+		}
+
 	
 	}
-	/*
-	// Update is called once per frame
-	void Update () {
-			//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
-		//sky.color = lerpedColor;
-		if (Time.time - time > 10 && Time.time - time < 100) {
-			for (int i = 0; i<num_buildings; i++) {
-				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
-				
-				buildings2[i].GetComponent<SpriteRenderer>().color = color;
-				
-			}
-			for (int i = 0; i<nuvols.Length; i++) {
-				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
-				nuvols[i].GetComponent<SpriteRenderer>().color = nuvolcolor;
-				
 
-			}
-			sky.color = skycolor;
-			count++;
-
-			//StartCoroutine("LerpColor");
+	public void Redmoon()
+	{
+		Debug.Log ("hola");
+		if (redmoon == true) {
+			StartCoroutine ("LerpMoon");
 		}
+	}
 
-		if (count >= 10000) {
-			for (int i = 0; i<num_buildings; i++) {
-				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
-				
-				buildings2[i].GetComponent<SpriteRenderer>().color = orig_color;
-				
-			}
-			for (int i = 0; i<nuvols.Length; i++) {
-				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
-				nuvols[i].GetComponent<SpriteRenderer>().color = orig_nuvol;
-				
-				
-			}
-			sky.color = orig_sky;
-			time = 0.0f;
-			count = 0;
+	IEnumerator LerpMoon()
+	{
+
+		float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
+		float increment = smoothness/duration;
+		while (progress < 1) {
+
+			moonco = Color.Lerp(Color.red, moon_orig, progress);
+			moon.image.color = moonco;
+			progress += increment;
+			yield return new WaitForSeconds(smoothness);
 		}
-}*/
+		redmoon = false;
+		yield return true;
+		StartCoroutine ("LerpColor2");
+
+	}
+
 	IEnumerator LerpColor()
 	{
 
@@ -168,9 +169,11 @@ public class BuildingSpawner : MonoBehaviour {
 			sky.color = currentColor;
 			cam.color = currentColor;
 			street.color = currentColor;
+			birds.volume = Mathf.Lerp (0.4f,0,progress);
+			//city.volume = Mathf.Lerp (0.4f,0.1f,progress);
 			//Debug.Log ("Hola");
 			currentColor = Color.Lerp(orig_sky, skycolor, progress);
-			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(0,1,progress));
+			moon.image.color = new Color(moon.image.color.r, moon.image.color.g, moon.image.color.b, Mathf.Lerp(0,1,progress));
 
 			for (int j = 0; j<bars.Length;j++)
 			{
@@ -218,13 +221,15 @@ public class BuildingSpawner : MonoBehaviour {
 			sky.color = currentColor;
 			cam.color = currentColor;
 			street.color = currentColor;
+			birds.volume = Mathf.Lerp (0,0.4f,progress);
+			//city.volume = Mathf.Lerp (0.1f,0.4f,progress);
 			for (int j = 0; j<bars.Length;j++)
 			{
 				bars[j].color = currentColor;
 			}
 			//cam.backgroundColor = currentColor;
 			//Debug.Log ("Hola");
-			moon.color = new Color(moon.color.r, moon.color.g, moon.color.b, Mathf.Lerp(1,0,progress));
+			moon.image.color = new Color(moon.image.color.r, moon.image.color.g, moon.image.color.b, Mathf.Lerp(1,0,progress));
 			currentColor = Color.Lerp(skycolor, orig_sky, progress);
 			for (int i = 0; i<num_buildings; i++) {
 				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);

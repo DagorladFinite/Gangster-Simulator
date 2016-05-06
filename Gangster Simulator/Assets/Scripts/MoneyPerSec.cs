@@ -12,7 +12,7 @@ public class MoneyPerSec : MonoBehaviour {
 	}
 
 	void Update(){
-		mpsDisplay.text = (GetMoneyPerSec () * click.multiplier2 + click.extra) + " Money/sec";
+		mpsDisplay.text = click.FormatNumber((GetMoneyPerSec () * click.multiplier2 + click.extra)) + " Money/sec";
 	}
 
 	public float GetMoneyPerSec(){

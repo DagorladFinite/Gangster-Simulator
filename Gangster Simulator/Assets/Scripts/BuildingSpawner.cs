@@ -30,6 +30,7 @@ public class BuildingSpawner : MonoBehaviour {
 	public SpriteRenderer sky;
 	public Color lerpedColor = Color.white;
 	float duration = 25; // This will be your time in seconds.
+	float duration2 = 10;
 	float smoothness = 0.02f; // This will determine the smoothness of the lerp. Smaller values are smoother. Really it's the time between updates.
 	Color currentColor = Color.white;
 	Color orig_color;
@@ -120,7 +121,7 @@ public class BuildingSpawner : MonoBehaviour {
 	
 
 		rand = Random.Range (0, 1000);
-		if (rand <= 5 && day == 1 && redmoon == false) {
+		if (rand <= 5 && day == 1 && redmoon == false && Time.time - timer <= 100) {
 			timer = Time.time;
 			moon.image.color = Color.red;
 			redmoon = true;
@@ -144,7 +145,7 @@ public class BuildingSpawner : MonoBehaviour {
 	{
 
 		float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
-		float increment = smoothness/duration;
+		float increment = smoothness/duration2;
 		while (progress < 1) {
 
 			moonco = Color.Lerp(Color.red, moon_orig, progress);

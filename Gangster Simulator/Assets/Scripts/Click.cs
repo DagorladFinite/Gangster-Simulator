@@ -62,6 +62,9 @@ public class Click : MonoBehaviour {
     public GameObject extrapanel;
 	public GameObject credits;
 
+	public AudioSource CoinSound;
+	public Camera cam;
+
     void Start(){
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
@@ -69,7 +72,7 @@ public class Click : MonoBehaviour {
 		date = System.DateTime.Now;
 		//Debug.Log (date);
         //Calc();
-		Save ();
+		//Save ();
 
 		for (int i = 0; i < pisos.Length; i++) {
 			pisos[i].SetActive(false);
@@ -122,14 +125,14 @@ public class Click : MonoBehaviour {
 			bar.blocksRaycasts = true;
 			bar.interactable = true;
 			barshow = true;
-			Debug.Log("Enabled");
+			//Debug.Log("Enabled");
 		}
 		else if (barshow == true) {
 			bar.alpha = 0;
 			bar.blocksRaycasts = false;
 			bar.interactable = false;
 			barshow = false;
-			Debug.Log("Disabled");
+			//Debug.Log("Disabled");
 		}
 
 
@@ -180,6 +183,7 @@ public class Click : MonoBehaviour {
                 pjs = new List<GameObject>();
                 Calc();
             }
+			CoinSound.Play();
             //Debug.Log(p);
             //SpawnManager.Spawn();
             // pjs.Add(SpawnManager.Spawn());
@@ -236,7 +240,8 @@ public class Click : MonoBehaviour {
 			UpgradeManager script = items[i].GetComponent<UpgradeManager>();
 			item.id = script.id;
 			item.amount = script.count;
-			data.itemsz.Add(item);		
+			data.itemsz.Add(item);	
+
 		}
 		for (int i=0; i<labels.Length; i++) {
 			Labels label = new Labels ();
@@ -259,6 +264,7 @@ public class Click : MonoBehaviour {
 			//Debug.Log ("Upgrade amount: " + upgrade.amount);
 
 		}
+		Debug.Log ("SAVED");
         data.extra = extra;
 		data.date = date.ToBinary().ToString();
 		data.upg.ToArray ();
@@ -332,6 +338,7 @@ public class Click : MonoBehaviour {
 				UpgradeManager script = items [i].GetComponent<UpgradeManager> ();
 				script.id = data.itemsz [i].id;
 				script.count = data.itemsz [i].amount;
+				//Debug.Log (i);
 			}
 			for (int i=0; i<labels.Length; i++) {
 				LayerManager script = labels [i].GetComponent<LayerManager> ();
@@ -441,7 +448,7 @@ public void popups(){
 
         float elapsed = 0.0f;
 
-        Vector3 originalCamPos = Camera.main.transform.position;
+        Vector3 originalCamPos = cam.transform.position;
 
         while (elapsed < duration)
         {
@@ -457,12 +464,12 @@ public void popups(){
             x *= magnitude * damper;
             y *= magnitude * damper;
 
-            Camera.main.transform.position = new Vector3(x, y, originalCamPos.z);
+            cam.transform.position = new Vector3(x, y, originalCamPos.z);
 
             yield return null;
         }
 
-        Camera.main.transform.position = originalCamPos;
+        cam.transform.position = originalCamPos;
     }
 }
 

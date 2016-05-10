@@ -26,7 +26,7 @@ public class music : MonoBehaviour {
 			pressed = true;
 		} else if (pressed == true) {
 			button.image.sprite = original;
-			musicSource.volume = 0.4f;
+			musicSource.volume = 0.2f;
 			pressed = false;
 		
 		}

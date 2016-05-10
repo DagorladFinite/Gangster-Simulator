@@ -4,6 +4,7 @@ using System.Collections;
 public class BuildingSpawner : MonoBehaviour {
 
 	public GameObject Building;
+	public GameObject BuildingBack;
 	public SpriteRenderer cam;
 	public UnityEngine.UI.Button moon;
 	public GameObject Building2;
@@ -29,7 +30,7 @@ public class BuildingSpawner : MonoBehaviour {
 	public Color nuvolcolor;
 	public SpriteRenderer sky;
 	public Color lerpedColor = Color.white;
-	float duration = 25; // This will be your time in seconds.
+	float duration = 15; // This will be your time in seconds.
 	float duration2 = 10;
 	float smoothness = 0.02f; // This will determine the smoothness of the lerp. Smaller values are smoother. Really it's the time between updates.
 	Color currentColor = Color.white;
@@ -48,6 +49,8 @@ public class BuildingSpawner : MonoBehaviour {
 	Color moonco = Color.white;
 	private float timer = 0;
 
+	public Click click;
+
 
 	// Use this for initialization
 	void Start () {
@@ -63,11 +66,15 @@ public class BuildingSpawner : MonoBehaviour {
 				Building = Instantiate (Building, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
 				Building2 = Instantiate (Building2, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
 				Building3 = Instantiate (Building3, new Vector3 (position + Posx, 5.0f, 0), Building.transform.rotation) as GameObject;
+				BuildingBack = Instantiate (BuildingBack, new Vector3 (position - 5 + Posx+2, 5.0f, 0), Building.transform.rotation) as GameObject;
 				//float Range = Random.Range(2,4);
 				Building.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
 				Building2.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
 				Building3.transform.localScale = new Vector3 (0.5f,0.7f,0.5f);
+				BuildingBack.transform.localScale = new Vector3 (0.8f,1.0f,0.5f);
 				int sprite= Random.Range (0,Buildings.Length);
+
+				BuildingBack.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 
 				if (sprite == 4 && counter <=2)
 			{
@@ -75,6 +82,7 @@ public class BuildingSpawner : MonoBehaviour {
 				Building.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 				Building2.GetComponent<SpriteRenderer>().sprite = Buildings_night[sprite];
 				Building3.GetComponent<SpriteRenderer>().sprite = Buildings_lights[sprite];
+				//BuildingBack.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 			}
 			else if (sprite == 4 && counter >2)
 			{
@@ -85,15 +93,18 @@ public class BuildingSpawner : MonoBehaviour {
 				Building.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 				Building2.GetComponent<SpriteRenderer>().sprite = Buildings_night[sprite];
 				Building3.GetComponent<SpriteRenderer>().sprite = Buildings_lights[sprite];
+				//BuildingBack.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 			}
 			else{
 				Building.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 				Building2.GetComponent<SpriteRenderer>().sprite = Buildings_night[sprite];
 				Building3.GetComponent<SpriteRenderer>().sprite = Buildings_lights[sprite];
+				//BuildingBack.GetComponent<SpriteRenderer>().sprite = Buildings[sprite];
 			}
 				Building.transform.SetParent(transform);
 				Building2.transform.SetParent(transform);
 				Building3.transform.SetParent(transform);
+				BuildingBack.transform.SetParent(transform);
 				position = position+off;
 				//buildings[i] = Building;
 			}
@@ -102,6 +113,7 @@ public class BuildingSpawner : MonoBehaviour {
 		buildings4 = GameObject.FindGameObjectsWithTag ("Building_lights") as GameObject[];
 		nuvols = GameObject.FindGameObjectsWithTag ("Nuvol") as GameObject[];
 	//	StartCoroutine("LerpColor");
+		//BuildingBack.GetComponent<SpriteRenderer> ().color = Color.black;
 		time = Time.time;
 
 		orig_color = buildings2 [1].GetComponent<SpriteRenderer> ().color;
@@ -120,13 +132,13 @@ public class BuildingSpawner : MonoBehaviour {
 	void Update(){
 	
 
-		rand = Random.Range (0, 1000);
-		if (rand <= 5 && day == 1 && redmoon == false && Time.time - timer <= 100) {
+		rand = Random.Range (0, 10000);
+		if (rand <= 5 && day == 1 && redmoon == false && Time.time - timer >= 1000) {
 			timer = Time.time;
 			moon.image.color = Color.red;
 			redmoon = true;
-			StopCoroutine ("LerpColor");
-			StopCoroutine ("LerpColor2");
+			//StopCoroutine ("LerpColor");
+			//StopCoroutine ("LerpColor2");
 
 		}
 
@@ -146,6 +158,8 @@ public class BuildingSpawner : MonoBehaviour {
 
 		float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
 		float increment = smoothness/duration2;
+		click.multiplier += 1.5f;
+		click.shake = true;
 		while (progress < 1) {
 
 			moonco = Color.Lerp(Color.red, moon_orig, progress);
@@ -154,8 +168,10 @@ public class BuildingSpawner : MonoBehaviour {
 			yield return new WaitForSeconds(smoothness);
 		}
 		redmoon = false;
+		click.multiplier -= 1.5f;
+		click.shake = false;
 		yield return true;
-		StartCoroutine ("LerpColor2");
+		//StartCoroutine ("LerpColor2");
 
 	}
 
@@ -188,7 +204,7 @@ public class BuildingSpawner : MonoBehaviour {
 				buildings4[i].GetComponent<SpriteRenderer>().color = newColor3;
 				Color newColor = new Color(orig_color.r, orig_color.g, orig_color.b, Mathf.Lerp(1,0,progress));
 				buildings2[i].GetComponent<SpriteRenderer>().color = newColor;
-				Color newColor2 = new Color(orig_color2.r, orig_color2.g, orig_color2.b, Mathf.Lerp(0,1,progress));
+				Color newColor2 = new Color(orig_color2.r, orig_color2.g, orig_color2.b, Mathf.Lerp(0.1f,1,progress));
 				buildings3[i].GetComponent<SpriteRenderer>().color = newColor2;
 				
 			}
@@ -235,7 +251,7 @@ public class BuildingSpawner : MonoBehaviour {
 			for (int i = 0; i<num_buildings; i++) {
 				//lerpedColor = Color.Lerp(Color.white, Color.black, Time.time);
 				
-				Color newColor = new Color(orig_color.r, orig_color.g, orig_color.b, Mathf.Lerp(0,1,progress));
+				Color newColor = new Color(orig_color.r, orig_color.g, orig_color.b, Mathf.Lerp(0.1f,1,progress));
 				buildings2[i].GetComponent<SpriteRenderer>().color = newColor;
 				Color newColor2 = new Color(orig_color2.r, orig_color2.g, orig_color2.b, Mathf.Lerp(1,0,progress));
 				buildings3[i].GetComponent<SpriteRenderer>().color = newColor2;

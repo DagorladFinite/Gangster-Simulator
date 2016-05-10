@@ -14,6 +14,7 @@ public class UpgradeManager : MonoBehaviour {
 	public Color aff;
 	public int id;
 	private float _baseCost;
+	private float _basePower;
 	//public int buyings = 0;
 
 	
@@ -25,10 +26,11 @@ public class UpgradeManager : MonoBehaviour {
 
 	void Start(){
 		_baseCost = cost;
+		_basePower = clickPower;
 	}
 
 	void Update(){
-		itemInfo.text = itemName + "\nCost: " + cost + "\nPower: +" + clickPower + "\nAmount: " + count;
+		itemInfo.text = itemName + "\nCost: " + click.FormatNumber(cost) + "\nPower: +" + clickPower + "\nAmount: " + count;
 
 		if (click.gold >= cost) {
 			GetComponent<Image> ().color = aff;

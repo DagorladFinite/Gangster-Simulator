@@ -31,7 +31,7 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	void Update(){
-		itemInfo.text = itemName + "\nCost: " + cost + "\nMoney: " + tickValue + "/s" + "\nAmount: " + count;
+		itemInfo.text = itemName + "\nCost: " + click.FormatNumber(cost) + "\nMoney: " + tickValue + "/s" + "\nAmount: " + count;
 		cst.text = cost.ToString();
 		mps.text = tickValue.ToString();
 		amnt.text = count.ToString();

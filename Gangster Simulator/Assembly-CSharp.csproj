@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Extra.cs" />
+     <Compile Include="Assets\Scripts\BirdSpawner.cs" />
      <Compile Include="Assets\Scripts\Broker.cs" />
      <Compile Include="Assets\Scripts\BuildingSpawner.cs" />
      <Compile Include="Assets\Scripts\ButtonColor.cs" />

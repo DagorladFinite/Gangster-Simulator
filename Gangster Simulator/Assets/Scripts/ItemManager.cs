@@ -44,6 +44,10 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void PurchasedItem(){
+		if (click.fte3Arrow == false) {
+			click.fte3Arrow = true;
+			click.arrow.SetActive(false);
+		}
 		if (click.gold >= cost && click.canclick == true) {
 			click.gold -= cost;
 			count += 1;

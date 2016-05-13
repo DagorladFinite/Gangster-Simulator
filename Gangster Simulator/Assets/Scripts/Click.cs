@@ -10,6 +10,21 @@ using UnityEngine.Analytics;
 
 public class Click : MonoBehaviour {
 
+	public FTE fte;
+	public bool fte1 = false;
+	public bool fte2 = false;
+	public bool fte2Arrow = false;
+	public bool fte3 = false;
+	public bool fte3Arrow = false;
+	public bool fte4 = false;
+	public bool fte4Arrow = false;
+	public bool fte5 = false;
+	public GameObject arrow;
+	public double buyitemcost;
+	public double buyupgradecost;
+	public double karmalimit;
+	public GameObject terrain;
+
 	public UnityEngine.UI.Text GoldDisplay;
 	public UnityEngine.UI.Text mpc;
 	public double gold = 0;
@@ -65,25 +80,76 @@ public class Click : MonoBehaviour {
 	public AudioSource CoinSound;
 	public Camera cam;
 
+	public bool autoload;
+
     void Start(){
+
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
         pjs = new List<GameObject>();
 		date = System.DateTime.Now;
+		if (autoload == true) {
+			load();
+		}
 		//Debug.Log (date);
         //Calc();
 		//Save ();
-
+		if (fte1 == false && fte2 == false && fte3 == false) {
+			upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
+			for (int i = 0; i<upgrades.Length;i++)
+			{
+				upgrades[i].SetActive(false);
+			}
+		}
+		/*
 		for (int i = 0; i < pisos.Length; i++) {
 			pisos[i].SetActive(false);
 		}
-
+*/
 
     }
 
 	//GUI.Button(new Rect(10, 20, 100, 20), "Hello World");
 
 	void Update(){
+		if (fte1 == false) {
+			canclick = false;
+			fte1 = true;
+			fte.Part1();
+		
+		}
+
+		if (fte1 == true && fte2 == false && gold >= buyitemcost) {
+			canclick = false;
+			fte2 = true;
+			fte.Part2();
+		}
+
+		if (fte2 == true && fte3 == false && gold >= buyupgradecost && fte2Arrow == true) {
+			fte3 = true;
+			for (int i = 0; i<upgrades.Length;i++)
+			{
+				upgrades[i].SetActive(true);
+			}
+			canclick = false;
+
+			fte.Part3();
+		}
+
+		if (fte3 == true && fte4 == false && fte3Arrow == true && karma >= karmalimit || karma <= -karmalimit ) {
+			fte4 = true;
+			//arrow.transform.SetParent(terrain.transform);
+			canclick = false;
+			
+			fte.Part4();
+		}
+
+
+
+
+
+
+
 		GoldDisplay.text = "Money: " + FormatNumber (gold);
 			//gold.ToString("F0") ;
 		mpc.text = FormatNumber(goldperclick*multiplier) + " Money/click";
@@ -120,21 +186,25 @@ public class Click : MonoBehaviour {
 		}
 	}
 	public void barr(){
-		if (barshow == false) {
-			bar.alpha = 1;
-			bar.blocksRaycasts = true;
-			bar.interactable = true;
-			barshow = true;
-			//Debug.Log("Enabled");
+		if (canclick == true) {
+			if (barshow == false) {
+				if(fte2Arrow == false){
+					fte2Arrow = true;
+					arrow.SetActive(false);
+				}
+				bar.alpha = 1;
+				bar.blocksRaycasts = true;
+				bar.interactable = true;
+				barshow = true;
+				//Debug.Log("Enabled");
+			} else if (barshow == true) {
+				bar.alpha = 0;
+				bar.blocksRaycasts = false;
+				bar.interactable = false;
+				barshow = false;
+				//Debug.Log("Disabled");
+			}
 		}
-		else if (barshow == true) {
-			bar.alpha = 0;
-			bar.blocksRaycasts = false;
-			bar.interactable = false;
-			barshow = false;
-			//Debug.Log("Disabled");
-		}
-
 
 	}
 	public string  FormatNumber(double value)
@@ -265,6 +335,13 @@ public class Click : MonoBehaviour {
 
 		}
 		Debug.Log ("SAVED");
+		data.fte1 = fte1;
+		data.fte2 = fte2;
+		data.fte3 = fte3;
+		data.fte4 = fte4;
+		data.fte5 = fte5;
+		data.fte2Arrow = fte2Arrow;
+		data.fte3Arrow = fte3Arrow;
         data.extra = extra;
 		data.date = date.ToBinary().ToString();
 		data.upg.ToArray ();
@@ -358,6 +435,13 @@ public class Click : MonoBehaviour {
 				
 
 			}
+			fte1 = data.fte1;
+			fte2 = data.fte2;
+			fte3 = data.fte3;
+			fte4 = data.fte4;
+			fte5 = data.fte5;
+			fte2Arrow = data.fte2Arrow;
+			fte3Arrow = data.fte3Arrow;
 			long temp = Convert.ToInt64(data.date);
 			DateTime oldDate = DateTime.FromBinary(temp);
 			difference = date.Subtract(oldDate);
@@ -381,21 +465,31 @@ public class Click : MonoBehaviour {
 	}
 
 	public void settings(){
-		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
-		for (int i= 0; i<pjs.Length; i++) {
-			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
-			foreach (SpriteRenderer rnd in rend)
-				rnd.enabled = false;
+		if (canclick == true) {
+			GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
+			for (int i= 0; i<pjs.Length; i++) {
+				SpriteRenderer[] rend = pjs [i].GetComponentsInChildren<SpriteRenderer> ();
+				foreach (SpriteRenderer rnd in rend)
+					rnd.enabled = false;
 			
 			
+			}
+			set = true;
+			pp.alpha = 100;
+			pp.blocksRaycasts = true;
+			pp.interactable = true;
+			canclick = false;
 		}
-		set = true;
-		pp.alpha = 100;
-		pp.blocksRaycasts = true;
-		pp.interactable = true;
-		canclick = false;
 	}
 	public void broker(){
+		if (canclick == true) {
+			/*
+			if(fte4Arrow == false)
+			{
+				fte4Arrow = true;
+				arrow.SetActive(false);
+			}
+*/
 		GameObject[] pjs = GameObject.FindGameObjectsWithTag ("Character");
 		for (int i= 0; i<pjs.Length; i++) {
 			SpriteRenderer[] rend = pjs[i].GetComponentsInChildren<SpriteRenderer>();
@@ -409,6 +503,7 @@ public class Click : MonoBehaviour {
 		pp2.blocksRaycasts = true;
 		pp2.interactable = true;
 		canclick = false;
+		}
 	}
 
 
@@ -504,6 +599,13 @@ class PlayerData
 	public double karma;
     public float extra;
 	public String date;
+	public bool fte1 = false;
+	public bool fte2 = false;
+	public bool fte2Arrow = false;
+	public bool fte3 = false;
+	public bool fte3Arrow = false;
+	public bool fte4 = false;
+	public bool fte5 = false;
 	public List<Items> itemsz = new List<Items> ();
 	public List<Labels> labs = new List<Labels> ();
 	public List<Upgrades> upg = new List<Upgrades> ();

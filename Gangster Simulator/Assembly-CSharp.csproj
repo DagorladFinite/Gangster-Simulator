@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\ButtonColor.cs" />
      <Compile Include="Assets\Scripts\Click.cs" />
      <Compile Include="Assets\Scripts\Deals.cs" />
+     <Compile Include="Assets\Scripts\FTE.cs" />
      <Compile Include="Assets\Scripts\Feedback.cs" />
      <Compile Include="Assets\Scripts\Feedbacker.cs" />
      <Compile Include="Assets\Scripts\Hideappear.cs" />

@@ -51,6 +51,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -59,6 +62,9 @@
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
@@ -81,11 +87,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Extra.cs" />
+    <Compile Include="Assets\Scripts\BirdSpawner.cs" />
     <Compile Include="Assets\Scripts\Broker.cs" />
     <Compile Include="Assets\Scripts\BuildingSpawner.cs" />
     <Compile Include="Assets\Scripts\ButtonColor.cs" />
     <Compile Include="Assets\Scripts\Click.cs" />
     <Compile Include="Assets\Scripts\Deals.cs" />
+    <Compile Include="Assets\Scripts\FTE.cs" />
     <Compile Include="Assets\Scripts\Feedback.cs" />
     <Compile Include="Assets\Scripts\Feedbacker.cs" />
     <Compile Include="Assets\Scripts\Hideappear.cs" />
@@ -96,6 +104,7 @@
     <Compile Include="Assets\Scripts\MoneyPerSec.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\MovementCos.cs" />
+    <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\Popups.cs" />
     <Compile Include="Assets\Scripts\Popups2.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
@@ -104,6 +113,8 @@
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\SwapUi.cs" />
     <Compile Include="Assets\Scripts\UpgradeManager.cs" />
+    <Compile Include="Assets\credits.cs" />
+    <Compile Include="Assets\music.cs" />
     <Compile Include="Assets\sprite.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

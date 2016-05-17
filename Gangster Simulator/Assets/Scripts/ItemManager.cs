@@ -44,7 +44,7 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void PurchasedItem(){
-		if (click.fte3Arrow == false) {
+		if (click.fte3Arrow == false && click.canclick == true) {
 			click.fte3Arrow = true;
 			click.arrow.SetActive(false);
 		}

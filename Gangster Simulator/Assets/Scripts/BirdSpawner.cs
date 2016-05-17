@@ -28,7 +28,7 @@ public class BirdSpawner : MonoBehaviour {
 		if (Time.time - timer2 >= Random.Range (15,23)) {
 			timer2 = Time.time;
 			SpawnBirdBrown();
-						Debug.Log("Hola");
+						//Debug.Log("Hola");
 			
 		}
 	
@@ -37,7 +37,7 @@ public class BirdSpawner : MonoBehaviour {
 	public void SpawnBird(){
 		Random.seed = (int)Time.time;
 		Vector3 start = new Vector3 (Bird.GetComponent<sprite>().start.x,Bird.GetComponent<sprite>().start.y + Random.Range (-2,15),Bird.GetComponent<sprite>().start.z);
-		Debug.Log(start);
+		//Debug.Log(start);
 		Berdu = Instantiate(Bird, start, Quaternion.identity) as GameObject;
 		Berdu.transform.localScale = new Vector3 (1, 1, 1);
 		Berdu.transform.SetParent (panel);
@@ -49,7 +49,7 @@ public class BirdSpawner : MonoBehaviour {
 	public void SpawnBirdBrown(){
 		Random.seed = (int)System.DateTime.Now.Ticks-20;
 		Vector3 start2 = new Vector3 (BirdBrown.GetComponent<sprite>().start.x,BirdBrown.GetComponent<sprite>().start.y + Random.Range (-3,20),BirdBrown.GetComponent<sprite>().start.z);
-		Debug.Log(start2);
+		//Debug.Log(start2);
 		BerduBrown = Instantiate(BirdBrown, start2, Quaternion.identity) as GameObject;
 		BerduBrown.transform.localScale = new Vector3 (1, 1, 1);
 		BerduBrown.transform.SetParent (panel);

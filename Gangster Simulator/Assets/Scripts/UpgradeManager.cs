@@ -44,7 +44,8 @@ public class UpgradeManager : MonoBehaviour {
 			click.gold -= cost;
 			count += 1;
 			click.goldperclick += clickPower;
-			cost =Mathf.Round( _baseCost* Mathf.Pow (1.15f, count));
+			cost = Mathf.Round( _baseCost* Mathf.Pow (1.15f, count));
+			clickPower = (int)Mathf.Round( _basePower* Mathf.Pow (1.05f, count));
 			click.buyings++;
 
 			if (click.buyings == 10 && click.pis_current< click.pisos.Length)

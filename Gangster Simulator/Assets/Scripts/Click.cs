@@ -24,6 +24,7 @@ public class Click : MonoBehaviour {
 	public double buyupgradecost;
 	public double karmalimit;
 	public GameObject terrain;
+	public GameObject dealer;
 
 	public UnityEngine.UI.Text GoldDisplay;
 	public UnityEngine.UI.Text mpc;
@@ -100,6 +101,9 @@ public class Click : MonoBehaviour {
 			{
 				upgrades[i].SetActive(false);
 			}
+			if( fte4 == false){
+				dealer.SetActive(false);
+			}
 		}
 		/*
 		for (int i = 0; i < pisos.Length; i++) {
@@ -138,10 +142,20 @@ public class Click : MonoBehaviour {
 
 		if (fte3 == true && fte4 == false && fte3Arrow == true && karma >= karmalimit || karma <= -karmalimit ) {
 			fte4 = true;
+			dealer.SetActive(true);
 			//arrow.transform.SetParent(terrain.transform);
 			canclick = false;
 			
 			fte.Part4();
+		}
+
+		if (fte4 == true && fte5 == false && pis_current >=3 ) {
+			fte5 = true;
+			dealer.SetActive(true);
+			//arrow.transform.SetParent(terrain.transform);
+			canclick = false;
+			
+			fte.Part5();
 		}
 
 

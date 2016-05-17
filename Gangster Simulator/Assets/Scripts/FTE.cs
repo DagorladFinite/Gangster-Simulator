@@ -7,6 +7,7 @@ public class FTE : MonoBehaviour {
 	public UnityEngine.UI.Text text;
 	public Click click;
 	public GameObject arrow;
+	public GameObject sett;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class FTE : MonoBehaviour {
 		panel.SetActive (true);
 		arrow.SetActive (true);
 		arrow.GetComponent<Animation> ().Play ("arrow2");
-		text.text = "You can also invest in some 'less legal'\n options to improve your income";
+		text.text = "You can also invest in some\n 'less legal'\n options to improve your income";
 	}
 
 	public void Part4(){
@@ -41,6 +42,15 @@ public class FTE : MonoBehaviour {
 		//arrow.SetActive (true);
 		//arrow.GetComponent<Animation> ().Play ("arrow3");
 		text.text = "Watch out! Your karma levels are indicators of your behaviour \n You can always resort to the dealer";
+	}
+
+	public void Part5(){
+		panel.SetActive (true);
+		//arrow.SetActive (true);
+		//arrow.GetComponent<Animation> ().Play ("arrow3");
+		sett.GetComponent<Animation> ().Play ("settings");
+		text.fontSize = 15;
+		text.text = "Whenever you are ready, you can leave this bar behind and move to a new city \n you will get a passive income for every time you do this \n Select prestige in the options menu to start again!";
 	}
 
 

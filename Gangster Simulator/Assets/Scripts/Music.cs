@@ -5,7 +5,7 @@ public class Music : MonoBehaviour {
 
 	public AudioClip[] audios;
 	public AudioSource source;
-	private float overlap = 0.2F;
+	//private float overlap = 0.2F;
 	private int[] len = new int[5];
 
 

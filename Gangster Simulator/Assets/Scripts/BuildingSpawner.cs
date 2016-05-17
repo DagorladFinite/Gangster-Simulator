@@ -21,8 +21,8 @@ public class BuildingSpawner : MonoBehaviour {
 	private GameObject[] buildings2;
 	private GameObject[] buildings3;
 	private GameObject[] buildings4;
-	private GameObject[] nuvols;
-	private float time;
+	//private GameObject[] nuvols;
+	//private float time;
 	public Color color;
 	Color orig_color2;
 	Color orig_color3;
@@ -38,8 +38,8 @@ public class BuildingSpawner : MonoBehaviour {
 	Color orig_sky;
 	//Color orig_nuvol;
 	Color orig_cam;
-	Color street_color;
-	int count = 0;
+	//Color street_color;
+	//int count = 0;
 	public int day = 0;
 	public AudioSource birds;
 	//public AudioSource city;
@@ -111,10 +111,10 @@ public class BuildingSpawner : MonoBehaviour {
 		buildings2 = GameObject.FindGameObjectsWithTag ("Building") as GameObject[];
 		buildings3 = GameObject.FindGameObjectsWithTag ("Building_night") as GameObject[];
 		buildings4 = GameObject.FindGameObjectsWithTag ("Building_lights") as GameObject[];
-		nuvols = GameObject.FindGameObjectsWithTag ("Nuvol") as GameObject[];
+		//nuvols = GameObject.FindGameObjectsWithTag ("Nuvol") as GameObject[];
 	//	StartCoroutine("LerpColor");
 		//BuildingBack.GetComponent<SpriteRenderer> ().color = Color.black;
-		time = Time.time;
+	//	time = Time.time;
 
 		orig_color = buildings2 [1].GetComponent<SpriteRenderer> ().color;
 		orig_color2 = buildings3 [1].GetComponent<SpriteRenderer> ().color;
@@ -122,7 +122,7 @@ public class BuildingSpawner : MonoBehaviour {
 
 		orig_sky = sky.color;
 		//orig_nuvol = nuvols [1].GetComponent<SpriteRenderer> ().color;
-		street_color = street.color;
+		//street_color = street.color;
 
 		StartCoroutine("LerpColor");
 

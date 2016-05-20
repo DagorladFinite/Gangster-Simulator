@@ -6,11 +6,12 @@ public class sprite : MonoBehaviour {
 	Vector3 end;
 	float endx;
 	public Vector3 start;
+    public float speed;
 
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(MoveObject(transform, 1000.0f));
+		StartCoroutine(MoveObject(transform, speed));
 		end = new Vector3(transform.position.x - 10,transform.position.y, transform.position.z);
 		endx = transform.position.x - 20;
 		start = new Vector3(transform.position.x,transform.position.y, transform.position.z);

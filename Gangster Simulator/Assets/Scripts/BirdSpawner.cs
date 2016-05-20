@@ -5,7 +5,10 @@ public class BirdSpawner : MonoBehaviour {
 	public GameObject Bird;
 	GameObject Berdu;
 
-	public GameObject BirdBrown;
+    public GameObject Flock;
+    GameObject Flocku;
+
+    public GameObject BirdBrown;
 	GameObject BerduBrown;
 	public sprite bird;
 	float timer = 0;
@@ -34,9 +37,17 @@ public class BirdSpawner : MonoBehaviour {
 			
 		}
 
-	
-	
-	}
+        if (Time.time - timer3 >= Random.Range(5, 10))
+        {
+            timer3 = Time.time;
+          //  SpawnBirdFlock();
+            //Debug.Log("Hola");
+
+        }
+
+
+
+    }
 
 	public void SpawnBird(){
 		Random.seed = (int)Time.time;
@@ -46,19 +57,36 @@ public class BirdSpawner : MonoBehaviour {
 		Berdu = Instantiate(Bird, start, Quaternion.identity) as GameObject;
 		Berdu.transform.localScale = new Vector3 (1, 1, 1);
 		Berdu.transform.SetParent (panel);
+        Berdu.GetComponent<sprite>().speed = Random.Range(1000.0f, 300.0f);
 
 
 
 	}
+    public void SpawnBirdFlock()
+    {
+        Random.seed = (int)Time.time;
+
+        Vector3 start = new Vector3(Bird.GetComponent<sprite>().start.x, Bird.GetComponent<sprite>().start.y + Random.Range(-2, 30), Bird.GetComponent<sprite>().start.z);
+        //Debug.Log(start);
+        Flocku = Instantiate(Flock, start, Quaternion.identity) as GameObject;
+        Flocku.transform.localScale = new Vector3(1, 1, 1);
+        Flocku.transform.SetParent(panel);
+        Flocku.GetComponentsInChildren<Transform>().localScale = new Vector3(1, 1, 1);
+        //Flocku.GetComponent<sprite>().speed = Random.Range(1000.0f, 300.0f);
 
 
 
-	public void SpawnBirdBrown(){
+    }
+
+
+
+    public void SpawnBirdBrown(){
 		Random.seed = (int)System.DateTime.Now.Ticks-20;
 		Vector3 start2 = new Vector3 (BirdBrown.GetComponent<sprite>().start.x,BirdBrown.GetComponent<sprite>().start.y + Random.Range (-3,20),BirdBrown.GetComponent<sprite>().start.z);
 		//Debug.Log(start2);
 		BerduBrown = Instantiate(BirdBrown, start2, Quaternion.identity) as GameObject;
 		BerduBrown.transform.localScale = new Vector3 (1, 1, 1);
 		BerduBrown.transform.SetParent (panel);
-	}
+        BerduBrown.GetComponent<sprite>().speed = Random.Range(1000.0f, 300.0f);
+    }
 }

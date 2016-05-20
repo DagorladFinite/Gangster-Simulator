@@ -52,6 +52,13 @@ public class FTE : MonoBehaviour {
 		text.fontSize = 15;
 		text.text = "Whenever you are ready, you can leave this bar behind and move to a new city \n you will get a passive income for every time you do this \n Select prestige in the options menu to start again!";
 	}
+	public void Offline(double gold){
+		panel.SetActive (true);
+		//arrow.SetActive (true);
+		//arrow.GetComponent<Animation> ().Play ("arrow3");
+		text.text = "You got: " + click.FormatNumber(gold) +" from your offline earnings!";
+	}
+
 
 
 	public void close(){

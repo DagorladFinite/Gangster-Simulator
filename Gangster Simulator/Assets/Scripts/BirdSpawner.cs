@@ -4,11 +4,13 @@ using System.Collections;
 public class BirdSpawner : MonoBehaviour {
 	public GameObject Bird;
 	GameObject Berdu;
+
 	public GameObject BirdBrown;
 	GameObject BerduBrown;
 	public sprite bird;
 	float timer = 0;
 	float timer2 = 0;
+	float timer3 = 0;
 	public Transform panel;
 
 	// Use this for initialization
@@ -31,11 +33,14 @@ public class BirdSpawner : MonoBehaviour {
 						//Debug.Log("Hola");
 			
 		}
+
+	
 	
 	}
 
 	public void SpawnBird(){
 		Random.seed = (int)Time.time;
+
 		Vector3 start = new Vector3 (Bird.GetComponent<sprite>().start.x,Bird.GetComponent<sprite>().start.y + Random.Range (-2,15),Bird.GetComponent<sprite>().start.z);
 		//Debug.Log(start);
 		Berdu = Instantiate(Bird, start, Quaternion.identity) as GameObject;
@@ -45,6 +50,8 @@ public class BirdSpawner : MonoBehaviour {
 
 
 	}
+
+
 
 	public void SpawnBirdBrown(){
 		Random.seed = (int)System.DateTime.Now.Ticks-20;

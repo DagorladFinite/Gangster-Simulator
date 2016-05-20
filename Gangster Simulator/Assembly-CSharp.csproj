@@ -68,10 +68,12 @@
      <Compile Include="Assets\Scripts\Popups2.cs" />
      <Compile Include="Assets\Scripts\Settings.cs" />
      <Compile Include="Assets\Scripts\SkyManager.cs" />
+     <Compile Include="Assets\Scripts\SpawnCar.cs" />
      <Compile Include="Assets\Scripts\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\SwapUi.cs" />
      <Compile Include="Assets\Scripts\UpgradeManager.cs" />
+     <Compile Include="Assets\cotxes.cs" />
      <Compile Include="Assets\credits.cs" />
      <Compile Include="Assets\music.cs" />
      <Compile Include="Assets\sprite.cs" />

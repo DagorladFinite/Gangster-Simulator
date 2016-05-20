@@ -120,6 +120,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			fte1 = true;
 			fte.Part1();
+			Save ();
 		
 		}
 
@@ -127,6 +128,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			fte2 = true;
 			fte.Part2();
+			Save ();
 		}
 
 		if (fte2 == true && fte3 == false && gold >= buyupgradecost && fte2Arrow == true) {
@@ -138,6 +140,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 
 			fte.Part3();
+			Save ();
 		}
 
 		if (fte3 == true && fte4 == false && fte3Arrow == true && karma >= karmalimit || karma <= -karmalimit ) {
@@ -147,6 +150,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			
 			fte.Part4();
+			Save ();
 		}
 
 		if (fte4 == true && fte5 == false && pis_current >=3 ) {
@@ -156,6 +160,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			
 			fte.Part5();
+			Save ();
 		}
 
 
@@ -365,6 +370,7 @@ public class Click : MonoBehaviour {
 	}
 
 	public void Reset(){
+		Save ();
 		gold = 0;
 		goldperclick = 1;
 		karma = 0;
@@ -465,15 +471,22 @@ public class Click : MonoBehaviour {
 
 		}
 		}
+	void OnApplicationQuit() {
+		Save ();
+	}
 	public void cheat(){
 		gold = gold + 10000;
 	}
 
 	public void Offline(){
 		if (difference.TotalSeconds > 10 && difference.TotalSeconds < 20) {
+			double temp = gold + 1000;
 			gold = gold + 1000;
+			fte.Offline(temp);
 		} else if (difference.TotalSeconds > 20) {
+			double temp = gold + 10000;
 			gold = gold + 10000;
+			fte.Offline(temp);
 		}
 	
 	}

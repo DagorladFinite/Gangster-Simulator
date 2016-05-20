@@ -25,7 +25,7 @@ public class sprite : MonoBehaviour {
 	IEnumerator MoveObject(Transform thisTransform, float time)
 	{
 		//bar = GameObject.FindGameObjectWithTag ("Bar") as GameObject;
-		
+		int count = 0;
 		//Debug.Log(transform.position);
 		float i = 0.0f;
 		float rate = 1.0f / time;
@@ -35,7 +35,13 @@ public class sprite : MonoBehaviour {
 			float x = Mathf.Lerp (thisTransform.position.x, endx, i);
 			thisTransform.position = new Vector3(x,thisTransform.position.y, thisTransform.position.z);
 			//thisTransform.position.x = thisTransform.position.x
+			count++;
 			yield return new WaitForSeconds (0.00002f);
+
+			if (count >= 700)
+			{
+				Destroy(gameObject);
+			}
 			
 		}
 		//Destroy(gameObject);

@@ -17,7 +17,7 @@ public class Popups : MonoBehaviour {
 	
 	}
 	public void UpdateText(){
-		sub = click.gold - ((click.gold * 10) / 100);
+		sub = ((click.gold * 10) / 100);
 		text.text = "You were too good! The Mafia stole you " + click.FormatNumber (sub) + " of your money";
 	
 	}

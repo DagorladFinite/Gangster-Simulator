@@ -87,6 +87,7 @@ public class Click : MonoBehaviour {
 
 		items = GameObject.FindGameObjectsWithTag ("Item") as GameObject[];
 		labels = GameObject.FindGameObjectsWithTag ("Label") as GameObject[];
+		upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
         pjs = new List<GameObject>();
 		date = System.DateTime.Now;
 		if (autoload == true) {
@@ -96,7 +97,7 @@ public class Click : MonoBehaviour {
         //Calc();
 		//Save ();
 		if (fte1 == false && fte2 == false && fte3 == false) {
-			upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
+			//upgrades = GameObject.FindGameObjectsWithTag ("Upgrade") as GameObject[];
 			for (int i = 0; i<upgrades.Length;i++)
 			{
 				upgrades[i].SetActive(false);
@@ -105,11 +106,11 @@ public class Click : MonoBehaviour {
 				dealer.SetActive(false);
 			}
 		}
-		/*
-		for (int i = 0; i < pisos.Length; i++) {
-			pisos[i].SetActive(false);
+
+		for (int i = 0; i < pis_current; i++) {
+			pisos[i].SetActive(true);
 		}
-*/
+
 
     }
 
@@ -120,7 +121,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			fte1 = true;
 			fte.Part1();
-			Save ();
+		//	Save ();
 		
 		}
 
@@ -128,7 +129,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			fte2 = true;
 			fte.Part2();
-			Save ();
+			//Save ();
 		}
 
 		if (fte2 == true && fte3 == false && gold >= buyupgradecost && fte2Arrow == true) {
@@ -140,7 +141,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 
 			fte.Part3();
-			Save ();
+			//Save ();
 		}
 
 		if (fte3 == true && fte4 == false && fte3Arrow == true && karma >= karmalimit || karma <= -karmalimit ) {
@@ -150,7 +151,7 @@ public class Click : MonoBehaviour {
 			canclick = false;
 			
 			fte.Part4();
-			Save ();
+		//	Save ();
 		}
 
 		if (fte4 == true && fte5 == false && pis_current >=3 ) {
@@ -365,7 +366,9 @@ public class Click : MonoBehaviour {
 		data.date = date.ToBinary().ToString();
 		data.upg.ToArray ();
 		data.itemsz.ToArray ();
+		data.pis_current = pis_current;
 		bf.Serialize (file, data);
+
 		file.Close ();
 	}
 
@@ -463,6 +466,7 @@ public class Click : MonoBehaviour {
 			fte2Arrow = data.fte2Arrow;
 			fte3Arrow = data.fte3Arrow;
 			long temp = Convert.ToInt64(data.date);
+			pis_current = data.pis_current;
 			DateTime oldDate = DateTime.FromBinary(temp);
 			difference = date.Subtract(oldDate);
 			Debug.Log("Difference: " + difference);
@@ -480,11 +484,11 @@ public class Click : MonoBehaviour {
 
 	public void Offline(){
 		if (difference.TotalSeconds > 10 && difference.TotalSeconds < 20) {
-			double temp = gold + 1000;
+			double temp = 1000;
 			gold = gold + 1000;
 			fte.Offline(temp);
 		} else if (difference.TotalSeconds > 20) {
-			double temp = gold + 10000;
+			double temp = 10000;
 			gold = gold + 10000;
 			fte.Offline(temp);
 		}
@@ -626,6 +630,7 @@ class PlayerData
 	public double karma;
     public float extra;
 	public String date;
+	public int pis_current;
 	public bool fte1 = false;
 	public bool fte2 = false;
 	public bool fte2Arrow = false;

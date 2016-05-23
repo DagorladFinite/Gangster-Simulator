@@ -19,7 +19,7 @@ public class Popups2 : MonoBehaviour {
 	}
 
 	public void UpdateText(){
-		sub = click.gold - ((click.gold * 10) / 100);
+		sub =((click.gold * 10) / 100);
 		text.text = "Bad boy! The Police requires " + click.FormatNumber (sub) + " of your money";
 		
 	}

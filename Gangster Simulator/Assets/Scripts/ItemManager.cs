@@ -28,6 +28,10 @@ public class ItemManager : MonoBehaviour {
 	}
 	void Start(){
 		_baseCost = cost;
+		if (count >= 10) {
+			
+			img.sprite = T2;
+		}
 	}
 
 	void Update(){
@@ -58,6 +62,7 @@ public class ItemManager : MonoBehaviour {
 			
 			img.sprite = T2;
 		}
+		click.Save ();
 	}
 
     public void reset()

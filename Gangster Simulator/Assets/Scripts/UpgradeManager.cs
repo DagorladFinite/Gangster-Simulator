@@ -27,6 +27,9 @@ public class UpgradeManager : MonoBehaviour {
 	void Start(){
 		_baseCost = cost;
 		_basePower = clickPower;
+		if (cost >=1){
+			cost = Mathf.Round( _baseCost* Mathf.Pow (1.15f, count));
+		}
 	}
 
 	void Update(){

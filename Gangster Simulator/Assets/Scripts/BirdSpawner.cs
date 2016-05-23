@@ -62,23 +62,28 @@ public class BirdSpawner : MonoBehaviour {
 
 
 	}
+	/*
     public void SpawnBirdFlock()
     {
         Random.seed = (int)Time.time;
 
-        Vector3 start = new Vector3(Bird.GetComponent<sprite>().start.x, Bird.GetComponent<sprite>().start.y + Random.Range(-2, 30), Bird.GetComponent<sprite>().start.z);
+        Vector3 start = new Vector3(-40, Bird.GetComponent<sprite>().start.y-40, Bird.GetComponent<sprite>().start.z);
         //Debug.Log(start);
         Flocku = Instantiate(Flock, start, Quaternion.identity) as GameObject;
-        Flocku.transform.localScale = new Vector3(1, 1, 1);
+       // Flocku.transform.localScale = new Vector3(1, 1, 1);
         Flocku.transform.SetParent(panel);
-        Flocku.GetComponentsInChildren<Transform>().localScale = new Vector3(1, 1, 1);
+        Transform[] trans = Flocku.GetComponentsInChildren<Transform>();
+		foreach (Transform tr in trans) {
+			tr.localScale = new Vector3(7, 7, 7);
+			//tr.SetParent(panel);
+		}
         //Flocku.GetComponent<sprite>().speed = Random.Range(1000.0f, 300.0f);
 
 
 
     }
 
-
+*/
 
     public void SpawnBirdBrown(){
 		Random.seed = (int)System.DateTime.Now.Ticks-20;

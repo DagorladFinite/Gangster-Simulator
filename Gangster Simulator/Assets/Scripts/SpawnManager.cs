@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour {
 			Pej = Instantiate (Pj,new Vector3(Posx,transform.position.y+0.5f,0.0f),transform.rotation) as GameObject;
            // Pj.GetComponentInChildren<Spawner>().Spawn();
             Pej.transform.SetParent(transform);
+			Pej.transform.localScale = new Vector3(1,1,1);
 			Posx = Posx+0.2f;
 		
 		}

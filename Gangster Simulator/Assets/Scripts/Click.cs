@@ -156,7 +156,7 @@ public class Click : MonoBehaviour {
 
 		if (fte4 == true && fte5 == false && pis_current >=3 ) {
 			fte5 = true;
-			dealer.SetActive(true);
+			//dealer.SetActive(true);
 			//arrow.transform.SetParent(terrain.transform);
 			canclick = false;
 			

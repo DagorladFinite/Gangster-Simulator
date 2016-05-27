@@ -25,7 +25,10 @@ public class ButtonColor : MonoBehaviour {
 			GetComponentInChildren<Text> ().enabled = true;
             float rate = 1.0f / 10.0f;
             time = time - Time.deltaTime * rate; 
-			GetComponentInChildren<Text> ().text = (time*1000/60).ToString();
+			//float minutes = Mathf.Floor(time / 60).ToString("00");
+			//float seconds = Mathf.Floor(time % 60).ToString("00");
+
+			GetComponentInChildren<Text> ().text = Mathf.Floor (time*10).ToString();
 		}
 	}
 }

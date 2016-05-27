@@ -13,6 +13,9 @@ public class Deals : MonoBehaviour {
 	public float timer;
 	public bool cd;
 	public float time;
+	public UnityEngine.UI.Text posText;
+	public UnityEngine.UI.Text negText;
+	public FTE fte;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +25,8 @@ public class Deals : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		posText.text = "Investment: " + positiveCost + "\nKarma Repercussion: " + "+" + karmaGainPositive + "\nInvestment Multiplier: " + multiplier;
+		negText.text = "Investment: " + negativeCost + "\nKarma Repercussion: " + "-" + karmaGainNegative + "\nInvestment Multiplier: " + multiplier;
 	
 	}
 
@@ -66,5 +71,8 @@ public class Deals : MonoBehaviour {
 		cd = true;
 		//timer = Time.time;
 		yield return true;
+
+		fte.Dealer(cost * multiplier);
+		
 	}
 }

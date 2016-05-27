@@ -3,7 +3,7 @@ using System.Collections;
 
 public class music : MonoBehaviour {
 
-	public AudioSource musicSource;
+	public AudioSource[] musicSource;
 	public Sprite sprite;
 	public Sprite original;
 	public UnityEngine.UI.Button button;
@@ -22,11 +22,18 @@ public class music : MonoBehaviour {
 	public void Pressed(){
 	if (pressed == false) {
 			button.image.sprite = sprite;
-			musicSource.volume = 0;
+			for (int i = 0; i<musicSource.Length; i++)
+			{
+			musicSource[i].volume = 0;
+			}
 			pressed = true;
 		} else if (pressed == true) {
 			button.image.sprite = original;
-			musicSource.volume = 0.2f;
+			for (int i = 0; i<musicSource.Length; i++)
+			{
+				musicSource[i].volume = 0.2f;
+			}
+
 			pressed = false;
 		
 		}

@@ -59,6 +59,13 @@ public class FTE : MonoBehaviour {
 		text.text = "You got: " + click.FormatNumber(gold) +" from your offline earnings!";
 	}
 
+	public void Dealer(double inv){
+		panel.SetActive (true);
+		//arrow.SetActive (true);
+		//arrow.GetComponent<Animation> ().Play ("arrow3");
+		text.text = "You got: " + click.FormatNumber(inv) +" from your dealer investment!";
+	}
+
 
 
 	public void close(){

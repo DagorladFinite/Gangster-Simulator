@@ -144,7 +144,7 @@ public class Click : MonoBehaviour {
 			//Save ();
 		}
 
-		if (fte3 == true && fte4 == false && fte3Arrow == true && karma >= karmalimit || karma <= -karmalimit ) {
+		if (fte3 == true && fte4 == false && fte3Arrow == true && (karma >= karmalimit || karma <= -karmalimit )) {
 			fte4 = true;
 			dealer.SetActive(true);
 			//arrow.transform.SetParent(terrain.transform);
@@ -417,7 +417,7 @@ public class Click : MonoBehaviour {
 		pp.blocksRaycasts = false;
 		pp.interactable = false;
 		canclick = true;
-        extra += (tempcount * 0.1f) + (tempcount2 * 0.4f);
+        extra += (tempcount * 0.01f) + (tempcount2 * 0.04f);
 		extrapanel.SetActive(true);
         extratext.Updateextra();
         
@@ -483,15 +483,15 @@ public class Click : MonoBehaviour {
 	}
 
 	public void Offline(){
-		if (difference.TotalSeconds > 10 && difference.TotalSeconds < 20) {
-			double temp = 1000;
-			gold = gold + 1000;
+			double temp = (difference.TotalSeconds * gold) * 0.00005 ;
+			gold = gold + temp;
 			fte.Offline(temp);
-		} else if (difference.TotalSeconds > 20) {
+
+		 /*else if (difference.TotalSeconds > 20) {
 			double temp = 10000;
 			gold = gold + 10000;
 			fte.Offline(temp);
-		}
+		}*/
 	
 	}
 

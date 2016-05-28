@@ -38,7 +38,10 @@ public class Deals : MonoBehaviour {
 			click.gold = click.gold - positiveCost;
 			click.karma = click.karma + karmaGainPositive;
 			StartCoroutine(Deal (1, time, multiplier,positiveCost));
-			broker.Return();
+            karmaGainPositive = karmaGainPositive * 0.9f;
+            positiveCost = positiveCost * 1.1f;
+            multiplier = Random.Range(1, 3);
+            broker.Return();
 			//cd= false;
 	
 		}
@@ -52,7 +55,10 @@ public class Deals : MonoBehaviour {
 			click.gold = click.gold - negativeCost;
 			click.karma = click.karma - karmaGainNegative;
 			StartCoroutine(Deal (2, time, multiplier,negativeCost));
-			broker.Return();
+            karmaGainNegative = karmaGainNegative * 0.9f;
+            negativeCost = negativeCost * 1.1f;
+            multiplier = Random.Range(1, 3);
+            broker.Return();
 
 			
 		}

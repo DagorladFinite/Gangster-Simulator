@@ -17,7 +17,7 @@ public class MovementCos : MonoBehaviour {
     public void StartMove()
     {
         //while(transform.position != pointB)
-        StartCoroutine(MoveObject(transform, pointA,bar.transform.position , 15.0f));
+        StartCoroutine(MoveObject(transform, pointA,bar.transform.position , 100.0f));
     }
    
 	IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)

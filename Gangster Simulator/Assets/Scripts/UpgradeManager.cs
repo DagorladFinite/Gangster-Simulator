@@ -15,7 +15,9 @@ public class UpgradeManager : MonoBehaviour {
 	public int id;
 	private float _baseCost;
 	private float _basePower;
-	//public int buyings = 0;
+    //public int buyings = 0;
+   // public GameObject explosion;
+    //GameObject ex;
 
 	
 	void Awake()
@@ -51,9 +53,10 @@ public class UpgradeManager : MonoBehaviour {
 			clickPower = (int)Mathf.Round( _basePower* Mathf.Pow (1.05f, count));
 			click.buyings++;
 
-			if (click.buyings == 10 && click.pis_current< click.pisos.Length)
+			if (click.buyings == 50 && click.pis_current< click.pisos.Length)
 			{
 				click.pisos[click.pis_current].SetActive(true);
+              //  ex = Instantiate(explosion, click.pisos[click.pis_current].transform.position, click.pisos[click.pis_current].transform.rotation) as GameObject;
 				click.pis_current++;
 				click.buyings = 0;
 			}
